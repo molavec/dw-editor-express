@@ -1,85 +1,73 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+<script lang="ts">
+
+import Quill from "quill";
+import "quill/dist/quill.core.css";
+import "quill/dist/quill.bubble.css";
+import "quill/dist/quill.snow.css";
+
+export default {
+  props: {
+    modelValue: {
+      type: String,
+      default: "Hola Quill",
+    },
+  },
+  data() {
+    return {
+      editor: null,
+    };
+  },
+
+  mounted() {
+    var _this = this;
+
+    this.editor = new Quill(this.$refs.editor, {
+      modules: {
+        toolbar: [
+          [
+            {
+              header: [1, 2, 3, 4, false],
+            },
+          ],
+          ["bold", "italic", "underline", "link"],
+        ],
+      },
+      //theme: 'bubble',
+      theme: "snow",
+      formats: ["bold", "underline", "header", "italic", "link"],
+      placeholder: "Type something in here!",
+    });
+    this.editor.root.innerHTML = this.modelValue;
+    this.editor.on("text-change", function () {
+      return _this.update();
+    });
+  },
+
+  methods: {
+    update: function update() {
+      this.$emit(
+        "update:modelValue",
+        this.editor.getText() ? this.editor.root.innerHTML : ""
+      );
+    },
+  },
+};
+
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+  <div class="container">
+    <p>The Quill Editor Test</p>
+    <p>-----------</p>
+  </div>
 
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
+  <div class="container">
+    <div ref="editor"></div>  
+  </div>
 
-  <RouterView />
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-}
 </style>
