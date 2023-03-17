@@ -66,3 +66,7 @@ npm run test:e2e
 ```sh
 npm run lint
 ```
+
+
+
+https://github.com/quilljs/quill/issues/3240
