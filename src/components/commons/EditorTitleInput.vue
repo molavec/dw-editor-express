@@ -12,7 +12,7 @@
     class="editor-title-input"
     :options="options"
     theme="bubble"
-    @ready="quillReadyHandler"
+    
     @text-change="textHandler"
   />
 </template>

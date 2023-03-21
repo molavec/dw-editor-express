@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-between w-full p-2">
+  <div class="flex justify-content-start">
     <router-link to="/">
       <div class="flex content-center">
         <DigitalWriterLogo />

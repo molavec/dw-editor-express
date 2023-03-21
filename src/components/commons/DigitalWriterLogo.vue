@@ -1,12 +1,9 @@
 <template>
   <div>
     <img 
-      src="../../assets/logo.png" 
+      src="../../assets/images/logo.png" 
       alt="Digital Writer Logo"
-      class="w-12"
+      class="w-24 m-4"
     >
-  </div>
-  <div>
-    <p>Texto</p>
   </div>
 </template>

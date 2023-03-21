@@ -16,11 +16,11 @@
   <div class="flex text-center flex-col justify-center content-center w-screen min-h-[50vh] p-2">
     <div class="mb-4">
       <p class="text-xl">Wellcome to</p>
-      <p class="text-4xl font-bold my-4">Digital Writers NFT</p>
+      <p class="text-4xl font-bold my-4">DigitalWriters.<span class="text-rose-700">ART</span></p>
     </div>
     <div class="mt-4">
       <div class="flex justify-center">
-        <semipolar-spinner :animation-duration="2000" :size="65" color="#000000" />
+        <semipolar-spinner :animation-duration="2000" :size="65" color="#CD162C" />
       </div>
       <p>Loading app...</p>
     </div>
@@ -31,37 +31,7 @@
 import { SemipolarSpinner } from 'epic-spinners';
 import router from '../../router';
 
-// import { isUserLogged } from '../../firebase/auth';
-// import { useTexts } from '../../composable/useTexts';
-/*
-const testUser: UserType = {
-  id: '01',
-  email: 'molavec@gmail.com',
-  firstname: 'Miguel',
-  lastname: 'Olave',
-  alias: 'molavec',
-};
 
-updateActiveUser(testUser);
-*/
-
-//Behavior for user Login or logout
-//const { activeUser, fullname } = useActiveUser();
-//activeUser.value ? router.push('/texts') : router.push('/edit');
-
-//get Active text if already exists
-// const { getActiveText } = useTexts();
-
-//TODO: Improve this code
-// select redirect if user is logged or not
-// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
-// isUserLogged((isLogged: boolean, user: any) => {
-//   if (!isLogged && getActiveText()) {
-//     router.push('/edit');
-//   } else {
-//     router.push('/texts');
-//   }
-// });
 </script>
 
 <style scoped></style>
