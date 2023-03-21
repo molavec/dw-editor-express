@@ -65,7 +65,7 @@ import DigitalWriterLogo from '../commons/DigitalWriterLogo.vue';
 
 // -> INIT
 
-const { loadText,  saveText } = useTexts()
+const { loadText,  saveText } = useTexts();
 
 // -> METHODS
 const loadHandler = () => {

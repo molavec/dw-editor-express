@@ -1,11 +1,16 @@
 /* eslint-disable no-undef */
 const express = require('express');
-bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const app = express();
 const port = 3000;
 
 app.use(bodyParser.json());
+
+app.use(cors({
+  origin: ['http://localhost:5173']
+}));
 
 let text = null;
 

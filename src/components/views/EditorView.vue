@@ -63,11 +63,13 @@ const { setActiveText } = useTexts();
 
 // --> METHODS
 const titleChangeHandler = (content: Delta) => {
+  console.log('content', content);
   editorContent.value.title = content;
   setActiveText(editorContent.value);
 }
 
 const contentChangeHandler = (content: Delta) => {
+  console.log('content', content);
   editorContent.value.content = content;
   setActiveText(editorContent.value);
 }

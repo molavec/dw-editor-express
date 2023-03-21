@@ -16,12 +16,35 @@ export const useTexts = () => {
   };
 
   const loadText = () => {
+    const requestOptions = {
+      method: 'GET',
+    };
+    
+    fetch("http://localhost:3000/load", requestOptions)
+      .then(response => response.text())
+      .then(result => {
+        console.log(result);
+      })
+      .catch(error => console.log('error', error));
     return activeText;
   };
 
   const saveText = () => {
-    
-    textStore.setActiveText(activeText.value);
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    const raw = JSON.stringify(getActiveText().value);
+
+    const requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+    };
+
+    fetch("http://localhost:3000/save", requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
   };
 
   return {

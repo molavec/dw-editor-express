@@ -17,8 +17,9 @@ import '@vueup/vue-quill/dist/vue-quill.bubble.css';
 import type { Quill, Sources } from 'quill';
 
 const props = defineProps<{ text?: string }>();
+const text: Ref<TextChangeType | string | undefined>= ref(props.text || undefined);
 const content: Ref<Delta | undefined> = ref();
-const text = ref(props.text || undefined);
+
 
 const emit = defineEmits(['textChange', 'blurEditor']);
 
@@ -35,25 +36,28 @@ interface TextChangeType { delta: Delta, oldContents: Delta, source: Sources }
 
 // --> METHODS
 const changeHandler = (content: TextChangeType) => {
-  console.log('delta', content.delta);
-  console.log('oldContents', content.oldContents);
-  console.log('source', content.source);
-  console.log('========================')
+  // console.log('delta', content.delta);
+  // console.log('oldContents', content.oldContents);
+  // console.log('source', content.source);
+  // console.log('========================');
+
+  text.value = content;
 
   // lift up text
   emit('textChange', text.value);
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const blurHandler = (editor: Ref<Element>) => {
-  console.log('editor', editor);
-  console.log('========================')
+  // console.log('editor', editor);
+  // console.log('========================')
 
   content.value = quillEditor.value?.getContents();
-  console.log('content', content.value);
-  console.log('text', quillEditor.value?.getText());
+  // console.log('content', content.value);
+  // console.log('text', quillEditor.value?.getText());
   
   // lift up text
-  emit('blurEditor', text.value);
+  emit('blurEditor', content.value);
 };
 
 const readyHandler = (quill: Quill) => {
