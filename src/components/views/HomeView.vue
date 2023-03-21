@@ -28,8 +28,12 @@
 </template>
 
 <script setup lang="ts">
+import router from '@/router';
 import { SemipolarSpinner } from 'epic-spinners';
-import router from '../../router';
+
+setTimeout(() => {
+  router.push('/edit');
+}, 2000);
 
 
 </script>
