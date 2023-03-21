@@ -1,67 +1,68 @@
 <template>
-  <!-- 
-  <textarea
-    class="editor-content-input"
-    :value="text"
-    placeholder="Start writing your story here..."
-    @input="(event) => (text = (event.target  as HTMLTextAreaElement).value)"
-  />
-   -->
-
   <QuillEditor
     class="editor-content-input"
     :options="options"
     theme="bubble"
-    @ready="quillReadyHandler"
     @text-change="textHandler"
+    @blur="blurHandler"
+    @ready="readyHandler"
   />
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, type Ref } from 'vue';
 
-import { QuillEditor, Delta, Quill } from '@vueup/vue-quill';
+import { QuillEditor, Delta } from '@vueup/vue-quill';
 import '@vueup/vue-quill/dist/vue-quill.bubble.css';
+import type { Quill, Sources } from 'quill';
 
 const props = defineProps<{ text?: string }>();
-const text = ref(props.text || '');
+const text = ref(props.text || undefined);
 
-const emit = defineEmits(['textChange']);
+const emit = defineEmits(['textChange', 'blurEditor']);
 
-//Quill init
-const quillObject: Quill = ref(null);
+// --> DATA
+const quillEditor: Ref<Quill| undefined> = ref();
+
 const options = {
   debug: 'error',
   placeholder: 'Your title goes here...',
   readOnly: false,
 };
 
-// update content
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const textHandler = (delta: Delta) => {
-  // console.log('delta', delta);
-  // console.log('getText', quillObject.value.getText());
-  text.value = quillObject.value.getText();
+interface TextChangeType { delta: Delta, oldContents: Delta, source: Sources }
+
+// --> METHODS
+const textHandler = (content: TextChangeType) => {
+  console.log('delta', content.delta);
+  console.log('oldContents', content.oldContents);
+  console.log('source', content.source);
+  console.log('========================')
 
   // lift up text
   emit('textChange', text.value);
 };
 
-//Actions when Quill is loaded and ready
-const quillReadyHandler = (quill: Quill) => {
-  // Get Quill Object
-  quillObject.value = quill;
-  // console.log('quill', quillObject.value);
+const blurHandler = (editor: Ref<Element>) => {
+  console.log('editor', editor);
+  console.log('========================')
 
-  //1. TEST: inital data
-  //text.value = 'hola \nmundo';
-  //2. TEST: set text
-  //quillObject.value.setText(text.value);
-
-  //Apend data from properties
-  // console.log('quillReadyHandler', text.value);
-  quillObject.value.setText(text.value);
+  const content =  quillEditor.value?.getContents();
+  console.log('content', content);
+  console.log('text', quillEditor.value?.getText());
+  // lift up text
+  // emit('blurEditor', text.value);
 };
+
+const readyHandler = (quill: Quill) => {
+  console.log('quill', quill);
+  console.log('========================')
+
+  quillEditor.value = quill;
+  // lift up text
+  // emit('blurEditor', text.value);
+};
+
 </script>
 
 <style>
@@ -71,8 +72,6 @@ const quillReadyHandler = (quill: Quill) => {
   height: 100%;
   padding: 1rem;
   padding-bottom: 150px;
-  margin-left: 0.5rem;
-  width: calc(100% - 1rem);
   font-size: 18px;
   color: #333333;
   margin-bottom: 50px;
@@ -80,6 +79,5 @@ const quillReadyHandler = (quill: Quill) => {
 
 .editor-content-input .ql-editor:focus {
   outline: none;
-  border: 1px #333333 solid;
 }
 </style>
