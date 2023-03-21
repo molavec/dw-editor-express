@@ -1,73 +1,10 @@
-<script lang="ts">
-
-import Quill from "quill";
-import "quill/dist/quill.core.css";
-import "quill/dist/quill.bubble.css";
-import "quill/dist/quill.snow.css";
-
-export default {
-  props: {
-    modelValue: {
-      type: String,
-      default: "Hola Quill",
-    },
-  },
-  data() {
-    return {
-      editor: null,
-    };
-  },
-
-  mounted() {
-    var _this = this;
-
-    this.editor = new Quill(this.$refs.editor, {
-      modules: {
-        toolbar: [
-          [
-            {
-              header: [1, 2, 3, 4, false],
-            },
-          ],
-          ["bold", "italic", "underline", "link"],
-        ],
-      },
-      //theme: 'bubble',
-      theme: "snow",
-      formats: ["bold", "underline", "header", "italic", "link"],
-      placeholder: "Type something in here!",
-    });
-    this.editor.root.innerHTML = this.modelValue;
-    this.editor.on("text-change", function () {
-      return _this.update();
-    });
-  },
-
-  methods: {
-    update: function update() {
-      this.$emit(
-        "update:modelValue",
-        this.editor.getText() ? this.editor.root.innerHTML : ""
-      );
-    },
-  },
-};
-
-</script>
-
 <template>
-
-  <div class="container">
-    <p>The Quill Editor Test</p>
-    <p>-----------</p>
-  </div>
-
-  <div class="container">
-    <div ref="editor"></div>  
-  </div>
-
+  <top-bar-app />
+  <!-- <router-view></router-view> -->
 </template>
 
-<style scoped>
+<script setup lang="ts">
+import TopBarApp from './components/combined/TopBarApp.vue';
+</script>
 
-</style>
+<style scoped></style>
