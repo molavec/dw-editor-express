@@ -3,7 +3,10 @@
     <img 
       src="../../assets/logo.png" 
       alt="Digital Writer Logo"
-      class="max-w-48"
+      class="w-12"
     >
+  </div>
+  <div>
+    <p>Texto</p>
   </div>
 </template>
