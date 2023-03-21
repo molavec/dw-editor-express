@@ -16,7 +16,7 @@ import { QuillEditor, Delta } from '@vueup/vue-quill';
 import '@vueup/vue-quill/dist/vue-quill.bubble.css';
 import type { Quill, Sources } from 'quill';
 
-const props = defineProps<{ text?: string | Delta }>();
+const props = defineProps<{ text?:any }>();
 const text: Ref<string | Delta | undefined>= ref(props.text || undefined);
 const content: Ref<Delta | undefined> = ref();
 

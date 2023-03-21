@@ -48,8 +48,8 @@ import type TextType from '../../interfaces/TextType';
 
 // --> DATA
 const isLoading = ref(false);
-const title: Ref<string | Delta | undefined> = ref('hola');
-const content: Ref<string | Delta | undefined> = ref('Mundo');
+const title: Ref<Delta | undefined> = ref();
+const content: Ref<Delta | undefined> = ref();
 const editorContent: Ref<TextType> = ref({
       id: '01',
   title: undefined,
@@ -65,10 +65,12 @@ const { getActiveText, setActiveText, isTextLoaded } = useTexts();
 // -> WATCHERS
 watch(isTextLoaded, (value) => {
   console.log("WATCHER", value)
-  // title.value = getActiveText().value?.title;
-  // content.value = getActiveText().value?.content;
-  title.value = 'title';
-  content.value = 'content';
+  title.value = getActiveText().value?.title;
+  content.value = getActiveText().value?.content;
+  console.log(title.value);
+  console.log(content.value);
+  // title.value = 'title';
+  // content.value = 'content';
 });
 
 

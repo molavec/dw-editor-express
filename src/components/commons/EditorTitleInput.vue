@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, type Ref } from 'vue';
+import { computed, ref, type Ref } from 'vue';
 
 import { QuillEditor, Delta } from '@vueup/vue-quill';
 import '@vueup/vue-quill/dist/vue-quill.bubble.css';
@@ -19,14 +19,19 @@ import type { Quill, Sources } from 'quill';
 
 const emit = defineEmits(['textChange', 'blurEditor']);
 
-const props = defineProps<{ text?: string | Delta }>();
+const props = defineProps<{ text?: Delta }>();
 
-console.log('props.text', props.text);
+console.log('PROPS.TEXT', props.text);
 
 // --> DATA
 const quillEditor: Ref<Quill| undefined> = ref();
-const text: Ref< string | Delta | undefined>= ref(props.text || undefined);
+// const text: Ref< string | Delta | undefined>= ref(props.text || undefined);
 const content: Ref<Delta | undefined> = ref();
+
+const text = computed(()=>{
+  console.log('COMPUTED TITLE');
+  return props.text;
+});
 
 const options = {
   debug: 'error',
@@ -67,7 +72,7 @@ const readyHandler = (quill: Quill) => {
 
   quillEditor.value = quill;
 
-  // quill.setContents(props.text);
+  if (props.text) quill.setContents(props.text);
 
   // lift up text
   // emit('blurEditor', text.value);
