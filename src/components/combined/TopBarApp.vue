@@ -28,6 +28,7 @@
             dark:border-rose-600
             dark:hover:border-rose-700
             dark:focus:ring-rose-900"
+            @click="loadHandler"
           >
           Abrir
         </button>
@@ -48,6 +49,7 @@
             dark:bg-rose-600
             dark:hover:bg-rose-700
             dark:focus:ring-rose-900"
+            @click="publishHandler"
         >
           Publicar
         </button>
@@ -58,6 +60,20 @@
 </template>
 
 <script setup lang="ts">
+import { useTexts } from '@/composable/useTexts';
 import DigitalWriterLogo from '../commons/DigitalWriterLogo.vue';
+
+// -> INIT
+
+const { loadText,  saveText } = useTexts()
+
+// -> METHODS
+const loadHandler = () => {
+  loadText();
+}
+
+const publishHandler = () => {
+  saveText();
+}
 
 </script>
