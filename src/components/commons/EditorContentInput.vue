@@ -16,8 +16,8 @@ import { QuillEditor, Delta } from '@vueup/vue-quill';
 import '@vueup/vue-quill/dist/vue-quill.bubble.css';
 import type { Quill, Sources } from 'quill';
 
-const props = defineProps<{ text?: string }>();
-const text: Ref<TextChangeType | string | undefined>= ref(props.text || undefined);
+const props = defineProps<{ text?: string | Delta }>();
+const text: Ref<string | Delta | undefined>= ref(props.text || undefined);
 const content: Ref<Delta | undefined> = ref();
 
 
@@ -35,13 +35,12 @@ const options = {
 interface TextChangeType { delta: Delta, oldContents: Delta, source: Sources }
 
 // --> METHODS
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const changeHandler = (content: TextChangeType) => {
   // console.log('delta', content.delta);
   // console.log('oldContents', content.oldContents);
   // console.log('source', content.source);
   // console.log('========================');
-
-  text.value = content;
 
   // lift up text
   emit('textChange', text.value);

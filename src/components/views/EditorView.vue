@@ -35,7 +35,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, type Ref} from 'vue';
+import { ref, watch, type Ref} from 'vue';
 import EditorTitleInput from '../commons/EditorTitleInput.vue';
 import EditorContentInput from '../commons/EditorContentInput.vue';
 import { SemipolarSpinner } from 'epic-spinners';
@@ -45,13 +45,13 @@ import { useTexts } from '../../composable/useTexts';
 import type TextType from '../../interfaces/TextType';
 
 //check if data is loading...
-const isLoading = ref(false);
 
 // --> DATA
-const title: Ref<string | undefined> = ref('');
-const content: Ref<string | undefined> = ref('');
+const isLoading = ref(false);
+const title: Ref<string | Delta | undefined> = ref('hola');
+const content: Ref<string | Delta | undefined> = ref('Mundo');
 const editorContent: Ref<TextType> = ref({
-  id: '01',
+      id: '01',
   title: undefined,
   content: undefined,
   authorId: 'Miguel Olave',
@@ -59,7 +59,18 @@ const editorContent: Ref<TextType> = ref({
 });
 
 // --> INIT
-const { setActiveText } = useTexts();
+const { getActiveText, setActiveText, isTextLoaded } = useTexts();
+
+
+// -> WATCHERS
+watch(isTextLoaded, (value) => {
+  console.log("WATCHER", value)
+  // title.value = getActiveText().value?.title;
+  // content.value = getActiveText().value?.content;
+  title.value = 'title';
+  content.value = 'content';
+});
+
 
 // --> METHODS
 const titleChangeHandler = (content: Delta) => {
