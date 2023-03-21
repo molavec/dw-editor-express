@@ -3,7 +3,7 @@
     class="editor-content-input"
     :options="options"
     theme="bubble"
-    @text-change="textHandler"
+    @text-change="changeHandler"
     @blur="blurHandler"
     @ready="readyHandler"
   />
@@ -17,6 +17,7 @@ import '@vueup/vue-quill/dist/vue-quill.bubble.css';
 import type { Quill, Sources } from 'quill';
 
 const props = defineProps<{ text?: string }>();
+const content: Ref<Delta | undefined> = ref();
 const text = ref(props.text || undefined);
 
 const emit = defineEmits(['textChange', 'blurEditor']);
@@ -33,7 +34,7 @@ const options = {
 interface TextChangeType { delta: Delta, oldContents: Delta, source: Sources }
 
 // --> METHODS
-const textHandler = (content: TextChangeType) => {
+const changeHandler = (content: TextChangeType) => {
   console.log('delta', content.delta);
   console.log('oldContents', content.oldContents);
   console.log('source', content.source);
@@ -47,11 +48,12 @@ const blurHandler = (editor: Ref<Element>) => {
   console.log('editor', editor);
   console.log('========================')
 
-  const content =  quillEditor.value?.getContents();
-  console.log('content', content);
+  content.value = quillEditor.value?.getContents();
+  console.log('content', content.value);
   console.log('text', quillEditor.value?.getText());
+  
   // lift up text
-  // emit('blurEditor', text.value);
+  emit('blurEditor', text.value);
 };
 
 const readyHandler = (quill: Quill) => {

@@ -19,8 +19,16 @@
     class="flex justify-center"
   >
     <div class="flex flex-col content-start max-w-screen-md w-full">
-      <EditorTitleInput class="w-full" :text="title" @text-change="titleChangeHandler" />
-      <EditorContentInput class="w-full" :text="content" @text-change="contentChangeHandler" />
+      <EditorTitleInput 
+        class="w-full" 
+        :text="title" 
+        @blur-editor="titleChangeHandler"
+      />
+      <EditorContentInput 
+        class="w-full" 
+        :text="content" 
+        @blur-editor="contentChangeHandler"
+      />
     </div>
   </div>
 
@@ -31,24 +39,38 @@ import { ref, type Ref} from 'vue';
 import EditorTitleInput from '../commons/EditorTitleInput.vue';
 import EditorContentInput from '../commons/EditorContentInput.vue';
 import { SemipolarSpinner } from 'epic-spinners';
+import type { Delta } from '@vueup/vue-quill';
+
+import { useTexts } from '../../composable/useTexts';
+import type TextType from '../../interfaces/TextType';
 
 //check if data is loading...
 const isLoading = ref(false);
 
-// REFs
+// --> DATA
 const title: Ref<string | undefined> = ref('');
 const content: Ref<string | undefined> = ref('');
+const editorContent: Ref<TextType> = ref({
+  id: '01',
+  title: undefined,
+  content: undefined,
+  authorId: 'Miguel Olave',
+  isPublished: true,
+});
+
+// --> INIT
+const { setActiveText } = useTexts();
 
 // --> METHODS
-const titleChangeHandler = () => {
-
+const titleChangeHandler = (content: Delta) => {
+  editorContent.value.title = content;
+  setActiveText(editorContent.value);
 }
 
-const contentChangeHandler = () => {
-  
+const contentChangeHandler = (content: Delta) => {
+  editorContent.value.content = content;
+  setActiveText(editorContent.value);
 }
-
-
 </script>
 
 <style scoped></style>

@@ -3,7 +3,7 @@
     <img 
       src="../../assets/images/logo.png" 
       alt="Digital Writer Logo"
-      class="w-24 m-4"
+      class="w-24 ml-2"
     >
   </div>
 </template>

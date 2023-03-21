@@ -2,13 +2,9 @@ import { storeToRefs } from 'pinia';
 import { useTextStore } from '../stores/textStore';
 import type TextType from '../interfaces/TextType';
 
-import { useActiveUser } from './useActiveUser';
-
 export const useTexts = () => {
   const textStore = useTextStore();
   const { activeText, textList } = storeToRefs(textStore);
-
-  const { getActiveUser } = useActiveUser();
 
   //Methods
   const getActiveText = () => {
@@ -20,16 +16,7 @@ export const useTexts = () => {
   };
 
   const updateTextListFromDB = async () => {
-    //1. get text from firestore
-    const activeUser = getActiveUser();
-    // console.log('activeUser', activeUser.value);
-    // const textList = await getTextListByAuthorId(activeUser.value?.id);
-    // console.log('textList', textList);
-
-    //2. set store
-    // textStore.setTextList(textList);
-
-    //3. return textList
+    
     return textList;
   };
 
