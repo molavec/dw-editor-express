@@ -10,7 +10,6 @@ Ejecutar el cliente web
 yarn dev
 ```
 
-
 Ejecutar el servidor express
 
 ```bash
