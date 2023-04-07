@@ -1,6 +1,7 @@
 <template>
   <div>
     <p> props.valor: {{ props.valor }} </p>
+    <p> valor: {{ valor }} </p>
     <p> valueState: {{ valueState }} </p>
   </div>
 </template>
@@ -12,6 +13,7 @@ const props = defineProps<{
   valor: number;
 }>();
 
+const valor = ref(props.valor);
 const valueState = ref(props.valor);
 
 console.log('props.valor', props.valor);
