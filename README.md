@@ -21,7 +21,6 @@ Como se prueba una función específica simplemente se crea la interfaz del obje
 
 ```typescript
 import type { Delta } from "@vueup/vue-quill";
-
 export default interface TextType {
   id?: string | undefined;
   title: Delta | undefined;

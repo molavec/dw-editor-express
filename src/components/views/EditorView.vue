@@ -24,11 +24,14 @@
         :text="title" 
         @blur-editor="titleChangeHandler"
       />
-      <EditorContentInput 
-        class="w-full" 
-        :text="content" 
-        @blur-editor="contentChangeHandler"
-      />
+
+      <div class="bg-rose-100 p-4">
+        <EditorBubbleInput 
+          :text="content"
+          @blur-editor="contentChangeHandler"
+        />
+      </div>
+      <ChatInput/>      
     </div>
   </div>
 
@@ -37,6 +40,8 @@
 <script setup lang="ts">
 import { ref, watch, type Ref} from 'vue';
 import EditorTitleInput from '../commons/EditorTitleInput.vue';
+import EditorBubbleInput from '../commons/EditorBubbleInput.vue';
+import ChatInput from '../commons/ChatInput.vue';
 import EditorContentInput from '../commons/EditorContentInput.vue';
 import { SemipolarSpinner } from 'epic-spinners';
 import type { Delta } from '@vueup/vue-quill';
@@ -49,7 +54,7 @@ import type TextType from '../../interfaces/TextType';
 // --> DATA
 const isLoading = ref(false);
 const title: Ref<Delta | undefined> = ref();
-const content: Ref<Delta | undefined> = ref();
+const content: Ref<string | undefined> = ref('Lorem ipsum lkdasjdlakjladkn aslkd aslkd alksd laks dlka sdlk alkd alkd alsk dlska dlkaj vlk;asj vkldsja df;jsa f;kljas d;klfjd sa;kfj sdak;j f;sdka fkasdj f;lksdja f;lsad f;l sdak;jf sda;kf a;sdkj ;');
 const editorContent: Ref<TextType> = ref({
       id: '01',
   title: undefined,
@@ -63,15 +68,15 @@ const { getActiveText, setActiveText, isTextLoaded } = useTexts();
 
 
 // -> WATCHERS
-watch(isTextLoaded, (value) => {
-  console.log("WATCHER", value)
-  title.value = getActiveText().value?.title;
-  content.value = getActiveText().value?.content;
-  console.log(title.value);
-  console.log(content.value);
-  // title.value = 'title';
-  // content.value = 'content';
-});
+// watch(isTextLoaded, (value) => {
+//   console.log("WATCHER", value)
+//   title.value = getActiveText().value?.title;
+//   content.value = getActiveText().value?.content;
+//   console.log(title.value);
+//   console.log(content.value);
+//   // title.value = 'title';
+//   // content.value = 'content';
+// });
 
 
 // --> METHODS
