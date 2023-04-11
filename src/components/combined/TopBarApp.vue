@@ -11,6 +11,9 @@
     <!-- Editor CTAs -->
     <div class="flex p-2">
       <div class="flex justify-center items-center px-2">
+        <ChatDocumentSwitcher/>
+      </div>
+      <div class="flex justify-center items-center px-2">
         <button
           class="text-rose-700
             border-2
@@ -62,6 +65,7 @@
 <script setup lang="ts">
 import { useTexts } from '@/composable/useTexts';
 import DigitalWriterLogo from '../commons/DigitalWriterLogo.vue';
+import ChatDocumentSwitcher from '../commons/ChatDocumentSwitcher.vue';
 
 // -> EMITS
 const emit = defineEmits(['loadText']);

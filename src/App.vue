@@ -1,15 +1,5 @@
 <template>
   <top-bar-app />
-  <div>
-    <p>
-      <button @click="addHandler">ADD ++</button>
-    </p>
-    <p>
-      <PropsTest :valor="valor"></PropsTest>
-    </p>
-
-  </div>
-
   <router-view></router-view>
 </template>
 

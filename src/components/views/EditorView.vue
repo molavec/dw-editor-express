@@ -26,10 +26,9 @@
       />
 
       <div class="bg-rose-100 p-4">
-        <EditorBubbleInput 
-          :text="content"
-          @blur-editor="contentChangeHandler"
-        />
+        <div v-for="(message, index) in messages" :key="index">
+          <EditorBubbleInput :text="message"/>
+        </div>
       </div>
       <ChatInput/>      
     </div>
