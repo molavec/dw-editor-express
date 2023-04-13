@@ -18,78 +18,63 @@
     v-else
     class="flex justify-center"
   >
-    <div class="flex flex-col content-start max-w-screen-md w-full">
-      <EditorTitleInput 
-        class="w-full" 
-        :text="title" 
-        @blur-editor="titleChangeHandler"
-      />
+    <div class="flex flex-col content-start h-[450px] max-h-[450px] max-w-screen-md w-full px-2">
+      <!-- Chat editor title -->
+      <div class="">
+        <EditorTitleInput 
+          class="w-full" 
+          :text="title" 
+          @blur-editor="titleChangeHandler"
+        />
+      </div>
 
-      <div class="bg-rose-100 p-4">
+      <!-- Chat Editor messages -->
+      <div class="bg-rose-100 p-4 grow max-h-full overflow-auto overscroll-none">
         <div v-for="(message, index) in messages" :key="index">
           <EditorBubbleInput :text="message"/>
         </div>
       </div>
-      <ChatInput/>      
+
+      <!-- Chat editor input -->
+      <div class="">
+        <ChatInput @send-message="messageHandler"/>      
+      </div>
+
     </div>
   </div>
 
 </template>
 
 <script setup lang="ts">
-import { ref, watch, type Ref} from 'vue';
+import { ref, type Ref} from 'vue';
 import EditorTitleInput from '../commons/EditorTitleInput.vue';
 import EditorBubbleInput from '../commons/EditorBubbleInput.vue';
 import ChatInput from '../commons/ChatInput.vue';
-import EditorContentInput from '../commons/EditorContentInput.vue';
 import { SemipolarSpinner } from 'epic-spinners';
 import type { Delta } from '@vueup/vue-quill';
 
 import { useTexts } from '../../composable/useTexts';
-import type TextType from '../../interfaces/TextType';
 
 //check if data is loading...
 
 // --> DATA
 const isLoading = ref(false);
 const title: Ref<Delta | undefined> = ref();
-const content: Ref<string | undefined> = ref('Lorem ipsum lkdasjdlakjladkn aslkd aslkd alksd laks dlka sdlk alkd alkd alsk dlska dlkaj vlk;asj vkldsja df;jsa f;kljas d;klfjd sa;kfj sdak;j f;sdka fkasdj f;lksdja f;lsad f;l sdak;jf sda;kf a;sdkj ;');
-const editorContent: Ref<TextType> = ref({
-      id: '01',
-  title: undefined,
-  content: undefined,
-  authorId: 'Miguel Olave',
-  isPublished: true,
-});
+const messages: Ref<string[]> = ref([]);
 
 // --> INIT
-const { getActiveText, setActiveText, isTextLoaded } = useTexts();
-
-
-// -> WATCHERS
-// watch(isTextLoaded, (value) => {
-//   console.log("WATCHER", value)
-//   title.value = getActiveText().value?.title;
-//   content.value = getActiveText().value?.content;
-//   console.log(title.value);
-//   console.log(content.value);
-//   // title.value = 'title';
-//   // content.value = 'content';
-// });
 
 
 // --> METHODS
 const titleChangeHandler = (content: Delta) => {
   console.log('content', content);
-  editorContent.value.title = content;
-  setActiveText(editorContent.value);
 }
 
-const contentChangeHandler = (content: Delta) => {
-  console.log('content', content);
-  editorContent.value.content = content;
-  setActiveText(editorContent.value);
+const messageHandler = (message: string) => {
+  messages.value.push(message);
 }
+
+
 </script>
 
 <style scoped></style>

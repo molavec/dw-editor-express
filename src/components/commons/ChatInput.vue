@@ -21,10 +21,11 @@ import { ref } from 'vue';
 
 const message = ref('');
 
+const emit = defineEmits(['sendMessage']);
+
 const sendMessage = () => {
   if (message.value) {
-    // send message logic
-    console.log(`Sending message: ${message.value}`);
+    emit('sendMessage', message.value);
     message.value = '';
   }
 };
