@@ -20,18 +20,14 @@
   >
     <div class="flex flex-col content-start h-full max-h-full max-w-screen-md w-full px-2">
       <!-- Chat editor title -->
-      <div class="">
-        <EditorTitleInput 
-          class="w-full" 
-          :text="title" 
-          @blur-editor="titleChangeHandler"
-        />
+      <div>
+        <input class="editor-title w-full" type="text" placeholder="Your title here..." v-model="title"/>
       </div>
 
 
       <div v-if="isChatTypeActive" class="h-full max-h-full">
         <!-- Chat Editor messages -->
-        <div class="bg-rose-100 p-4 h-full max-h-full overflow-auto overscroll-none">
+        <div class="bg-rose-100 p-4 h-full max-h-[600px] overflow-auto overscroll-none">
           <div v-for="(message, index) in messages" :key="index">
             <EditorBubbleInput :text="message"/>
           </div>
@@ -43,8 +39,8 @@
         </div>
       </div>
 
-      <div v-else class="bg-rose-100 p-4 h-full max-h-full overflow-auto overscroll-none">
-        <textarea cols="30" rows="10" v-model="content" class="p-2 w-full h-full resize-none" />
+      <div v-else class="p-4 h-full max-h-[600px] overflow-auto overscroll-none">
+        <textarea cols="30" rows="10" placeholder="Start here" v-model="content" class="p-2 w-full h-full resize-none" />
       </div>
 
     </div>
@@ -53,32 +49,23 @@
 </template>
 
 <script setup lang="ts">
-import { ref, type Ref, watch } from 'vue';
-import EditorTitleInput from '../commons/EditorTitleInput.vue';
+import { ref, watch } from 'vue';
 import EditorBubbleInput from '../commons/EditorBubbleInput.vue';
 import ChatInput from '../commons/ChatInput.vue';
+
 import { SemipolarSpinner } from 'epic-spinners';
-import type { Delta } from '@vueup/vue-quill';
 
 import { storeToRefs } from 'pinia';
-import { useEditorTypeStore } from '../../stores/editorTypeStore';
+import { useEditorStore } from '../../stores/editorStore';
 
-const isChatTypeStore  = useEditorTypeStore();
-const { isChatTypeActive } = storeToRefs(isChatTypeStore)
-
-
-
-
+const isChatTypeStore  = useEditorStore();
+const { isChatTypeActive, title, content, messages } = storeToRefs(isChatTypeStore);
 
 // --> DATA
 const isLoading = ref(false);
-const title: Ref<Delta | undefined> = ref();
-const messages: Ref<string[]> = ref([]);
-const content: Ref<string> = ref('');
+
 
 // --> WHATCHERS
-
-// watch works directly on a ref
 watch(isChatTypeActive, (isChatActive) => {
   if(isChatActive) {
     messages.value = content.value.split('\n');
@@ -87,16 +74,28 @@ watch(isChatTypeActive, (isChatActive) => {
   };
 })
 
-
 // --> METHODS
-const titleChangeHandler = (content: Delta) => {
-  console.log('content', content);
-}
-
 const messageHandler = (message: string) => {
   messages.value.push(message);
 }
 
 </script>
 
-<style scoped></style>
+<style scoped>
+.editor-title {
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  overflow: auto;
+  resize: none;
+  padding: 1rem;
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 2.5rem;
+  color: #333333;
+  border: 0px;
+}
+
+.editor-title:focus {
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  outline: none;
+}
+</style>

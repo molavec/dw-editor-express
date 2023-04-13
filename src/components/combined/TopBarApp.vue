@@ -52,9 +52,9 @@
             dark:bg-rose-600
             dark:hover:bg-rose-700
             dark:focus:ring-rose-900"
-            @click="publishHandler"
+            @click="saveHandler"
         >
-          Publicar
+          Guardar
         </button>
       </div>
     </div>
@@ -80,7 +80,7 @@ const loadHandler = () => {
   emit('loadText');
 }
 
-const publishHandler = () => {
+const saveHandler = () => {
   saveText();
 }
 

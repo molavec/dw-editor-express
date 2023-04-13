@@ -10,16 +10,12 @@ import { ref } from 'vue';
 
 import { ChatBubbleBottomCenterIcon } from '@heroicons/vue/24/outline';
 import { DocumentTextIcon } from '@heroicons/vue/24/outline';
+import { useEditorStore } from '../../stores/editorStore';
 
-import { useEditorTypeStore } from '../../stores/editorTypeStore';
-
-const isChatTypeStore  = useEditorTypeStore();
-
-
-const { setIsChatTypeActive } = isChatTypeStore;
+const editorStore  = useEditorStore();
+const { setIsChatTypeActive } = editorStore;
 
 const isChatType = ref(true);
-
 
 const toggleIcon = () => {
   isChatType.value = !isChatType.value;
