@@ -3,6 +3,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
+const DatabaseManager = require('./lib/DatabaseManager');
+
+
 const app = express();
 const port = 3000;
 
@@ -12,20 +15,22 @@ app.use(cors({
   origin: ['http://localhost:5173']
 }));
 
-let text = null;
-
 app.get('/', (req, res) => {
   res.send('DigitalWriter.<span style="color: red;">ART</span> on Express JS!');
 })
 
-app.get('/load', (req, res) => {
-  res.send(text);    // echo the result back
+app.get('/load', async (req, res) => {
+  const dbm = await DatabaseManager.getInstance();
+  const result = await dbm.load();
+  res.send(result);   
 })
 
-app.post('/save', (req, res) => {
+app.post('/save', async (req, res) => {
   console.log(req.body);      // your JSON
-  text = req.body;
-  res.send(text);    // echo the result back
+  const data = req.body;
+  const dbm = await DatabaseManager.getInstance();
+  await dbm.save(data.title, data.content);
+  res.send(data);    // echo the result back
 })
 
 app.listen(port, () => {
