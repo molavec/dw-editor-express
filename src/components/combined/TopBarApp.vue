@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-between w-full">
+  <div class="flex justify-between max-w-full">
     
     <!-- Logo -->
     <router-link to="/">
@@ -10,6 +10,9 @@
 
     <!-- Editor CTAs -->
     <div class="flex p-2">
+      <div class="flex justify-center items-center px-2">
+        <ChatDocumentSwitcher/>
+      </div>
       <div class="flex justify-center items-center px-2">
         <button
           class="text-rose-700
@@ -49,9 +52,9 @@
             dark:bg-rose-600
             dark:hover:bg-rose-700
             dark:focus:ring-rose-900"
-            @click="publishHandler"
+            @click="saveHandler"
         >
-          Publicar
+          Guardar
         </button>
       </div>
     </div>
@@ -62,20 +65,18 @@
 <script setup lang="ts">
 import { useTexts } from '@/composable/useTexts';
 import DigitalWriterLogo from '../commons/DigitalWriterLogo.vue';
-
-// -> EMITS
-const emit = defineEmits(['loadText']);
+import ChatDocumentSwitcher from '../commons/ChatDocumentSwitcher.vue';
 
 // -> INIT
 const { loadText,  saveText } = useTexts();
 
 // -> METHODS
+
 const loadHandler = () => {
   loadText();
-  emit('loadText');
 }
 
-const publishHandler = () => {
+const saveHandler = () => {
   saveText();
 }
 

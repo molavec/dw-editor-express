@@ -15,11 +15,13 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "@heroicons/vue": "^2.0.13",
+    "@heroicons/vue": "^2.0.17",
     "@metamask/detect-provider": "^2.0.0",
+    "@vue-hero-icons/outline": "^1.7.2",
     "@vueup/vue-quill": "^1.1.1",
     "cors": "^2.8.5",
     "epic-spinners": "^2.0.0",
+    "pg": "^8.10.0",
     "pinia": "^2.0.32",
     "vue": "^3.2.47",
     "vue-router": "^4.1.6",

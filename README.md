@@ -2,6 +2,13 @@
 
 Implementación que permite testear el editor exclusivamente comunicando datos a un servidor express.
 
+Crea un editor que almacena información del título y el contenido en una única fila de la tabla `text`.
+
+Puedes ver el funcionamiento en el video del siguiente enlace:
+
+https://www.berrycast.com/conversations/53cfee80-182d-55b3-a6ac-80b7a085fb37
+
+
 ## how to 
 
 Ejecutar el cliente web
@@ -10,7 +17,6 @@ Ejecutar el cliente web
 yarn dev
 ```
 
-
 Ejecutar el servidor express
 
 ```bash
@@ -18,16 +24,3 @@ cd server
 yarn dev
 ```
 
-Como se prueba una función específica simplemente se crea la interfaz del objeto texto:
-
-```typescript
-import type { Delta } from "@vueup/vue-quill";
-
-export default interface TextType {
-  id?: string | undefined;
-  title: Delta | undefined;
-  content: Delta | undefined;
-  authorId?: string | undefined;
-  isPublished?: boolean | undefined;
-}
-```

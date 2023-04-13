@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="isLoading"
-    class="flex flex-col justify-center content-center text-center w-screen min-h-[50vh] p-2"
+    class="flex flex-col justify-center content-center text-center w-screen p-2"
   >
     <div class="mb-4">
       <p class="text-xl">Wellcome to</p>
@@ -16,76 +16,86 @@
   </div>
   <div 
     v-else
-    class="flex justify-center"
+    class="flex justify-center h-full max-h-full"
   >
-    <div class="flex flex-col content-start max-w-screen-md w-full">
-      <EditorTitleInput 
-        class="w-full" 
-        :text="title" 
-        @blur-editor="titleChangeHandler"
-      />
-      <EditorContentInput 
-        class="w-full" 
-        :text="content" 
-        @blur-editor="contentChangeHandler"
-      />
+    <div class="flex flex-col content-start h-full max-h-full max-w-screen-md w-full px-2">
+      <!-- Chat editor title -->
+      <div>
+        <input class="editor-title w-full" type="text" placeholder="Your title here..." v-model="title"/>
+      </div>
+
+
+      <div v-if="isChatTypeActive" class="h-full max-h-full">
+        <!-- Chat Editor messages -->
+        <div class="bg-rose-100 p-4 h-full max-h-[600px] overflow-auto overscroll-none">
+          <div v-for="(message, index) in messages" :key="index">
+            <EditorBubbleInput :text="message"/>
+          </div>
+        </div>
+  
+        <!-- Chat editor input -->
+        <div class="">
+          <ChatInput @send-message="messageHandler"/>      
+        </div>
+      </div>
+
+      <div v-else class="p-4 h-full max-h-[600px] overflow-auto overscroll-none">
+        <textarea cols="30" rows="10" placeholder="Start here" v-model="content" class="p-2 w-full h-full resize-none" />
+      </div>
+
     </div>
   </div>
 
 </template>
 
 <script setup lang="ts">
-import { ref, watch, type Ref} from 'vue';
-import EditorTitleInput from '../commons/EditorTitleInput.vue';
-import EditorContentInput from '../commons/EditorContentInput.vue';
+import { ref, watch } from 'vue';
+import EditorBubbleInput from '../commons/EditorBubbleInput.vue';
+import ChatInput from '../commons/ChatInput.vue';
+
 import { SemipolarSpinner } from 'epic-spinners';
-import type { Delta } from '@vueup/vue-quill';
 
-import { useTexts } from '../../composable/useTexts';
-import type TextType from '../../interfaces/TextType';
+import { storeToRefs } from 'pinia';
+import { useEditorStore } from '../../stores/editorStore';
 
-//check if data is loading...
+const isChatTypeStore  = useEditorStore();
+const { isChatTypeActive, title, content, messages } = storeToRefs(isChatTypeStore);
 
 // --> DATA
 const isLoading = ref(false);
-const title: Ref<Delta | undefined> = ref();
-const content: Ref<Delta | undefined> = ref();
-const editorContent: Ref<TextType> = ref({
-      id: '01',
-  title: undefined,
-  content: undefined,
-  authorId: 'Miguel Olave',
-  isPublished: true,
-});
-
-// --> INIT
-const { getActiveText, setActiveText, isTextLoaded } = useTexts();
 
 
-// -> WATCHERS
-watch(isTextLoaded, (value) => {
-  console.log("WATCHER", value)
-  title.value = getActiveText().value?.title;
-  content.value = getActiveText().value?.content;
-  console.log(title.value);
-  console.log(content.value);
-  // title.value = 'title';
-  // content.value = 'content';
-});
-
+// --> WHATCHERS
+watch(isChatTypeActive, (isChatActive) => {
+  if(isChatActive) {
+    messages.value = content.value.split('\n');
+  } else {
+    content.value = messages.value.join('\n');
+  };
+})
 
 // --> METHODS
-const titleChangeHandler = (content: Delta) => {
-  console.log('content', content);
-  editorContent.value.title = content;
-  setActiveText(editorContent.value);
+const messageHandler = (message: string) => {
+  messages.value.push(message);
 }
 
-const contentChangeHandler = (content: Delta) => {
-  console.log('content', content);
-  editorContent.value.content = content;
-  setActiveText(editorContent.value);
-}
 </script>
 
-<style scoped></style>
+<style scoped>
+.editor-title {
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  overflow: auto;
+  resize: none;
+  padding: 1rem;
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 2.5rem;
+  color: #333333;
+  border: 0px;
+}
+
+.editor-title:focus {
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  outline: none;
+}
+</style>

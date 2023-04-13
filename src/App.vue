@@ -1,6 +1,8 @@
 <template>
-  <top-bar-app />
-  <router-view></router-view>
+  <div class="h-screen flex flex-col">
+    <top-bar-app />
+    <router-view></router-view>
+  </div>
 </template>
 
 <script setup lang="ts">
