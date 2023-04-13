@@ -29,16 +29,22 @@
       </div>
 
 
-      <!-- Chat Editor messages -->
-      <div class="bg-rose-100 p-4 h-full max-h-full overflow-auto overscroll-none">
-        <div v-for="(message, index) in messages" :key="index">
-          <EditorBubbleInput :text="message"/>
+      <div v-if="isChatTypeActive" class="h-full max-h-full">
+        <!-- Chat Editor messages -->
+        <div class="bg-rose-100 p-4 h-full max-h-full overflow-auto overscroll-none">
+          <div v-for="(message, index) in messages" :key="index">
+            <EditorBubbleInput :text="message"/>
+          </div>
+        </div>
+  
+        <!-- Chat editor input -->
+        <div class="">
+          <ChatInput @send-message="messageHandler"/>      
         </div>
       </div>
 
-      <!-- Chat editor input -->
-      <div class="">
-        <ChatInput @send-message="messageHandler"/>      
+      <div v-else class="bg-rose-100 p-4 h-full max-h-full overflow-auto overscroll-none">
+        <textarea cols="30" rows="10" v-model="content" class="p-2 w-full h-full resize-none" />
       </div>
 
     </div>
@@ -47,23 +53,39 @@
 </template>
 
 <script setup lang="ts">
-import { ref, type Ref} from 'vue';
+import { ref, type Ref, watch } from 'vue';
 import EditorTitleInput from '../commons/EditorTitleInput.vue';
 import EditorBubbleInput from '../commons/EditorBubbleInput.vue';
 import ChatInput from '../commons/ChatInput.vue';
 import { SemipolarSpinner } from 'epic-spinners';
 import type { Delta } from '@vueup/vue-quill';
 
-import { useTexts } from '../../composable/useTexts';
+import { storeToRefs } from 'pinia';
+import { useEditorTypeStore } from '../../stores/editorTypeStore';
 
-//check if data is loading...
+const isChatTypeStore  = useEditorTypeStore();
+const { isChatTypeActive } = storeToRefs(isChatTypeStore)
+
+
+
+
 
 // --> DATA
 const isLoading = ref(false);
 const title: Ref<Delta | undefined> = ref();
 const messages: Ref<string[]> = ref([]);
+const content: Ref<string> = ref('');
 
-// --> INIT
+// --> WHATCHERS
+
+// watch works directly on a ref
+watch(isChatTypeActive, (isChatActive) => {
+  if(isChatActive) {
+    messages.value = content.value.split('\n');
+  } else {
+    content.value = messages.value.join('\n');
+  };
+})
 
 
 // --> METHODS
@@ -74,7 +96,6 @@ const titleChangeHandler = (content: Delta) => {
 const messageHandler = (message: string) => {
   messages.value.push(message);
 }
-
 
 </script>
 

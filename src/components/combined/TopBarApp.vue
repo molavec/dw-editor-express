@@ -74,6 +74,7 @@ const emit = defineEmits(['loadText']);
 const { loadText,  saveText } = useTexts();
 
 // -> METHODS
+
 const loadHandler = () => {
   loadText();
   emit('loadText');

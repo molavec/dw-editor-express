@@ -7,16 +7,23 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+
 import { ChatBubbleBottomCenterIcon } from '@heroicons/vue/24/outline';
 import { DocumentTextIcon } from '@heroicons/vue/24/outline';
 
+import { useEditorTypeStore } from '../../stores/editorTypeStore';
+
+const isChatTypeStore  = useEditorTypeStore();
+
+
+const { setIsChatTypeActive } = isChatTypeStore;
+
 const isChatType = ref(true);
 
-const emit = defineEmits(['editorTypeChange']);
 
 const toggleIcon = () => {
   isChatType.value = !isChatType.value;
-  emit('editorTypeChange', isChatType.value);
+  setIsChatTypeActive(isChatType.value);
 };
 
 </script>
