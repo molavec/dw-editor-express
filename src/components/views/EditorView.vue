@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="isLoading"
-    class="flex flex-col justify-center content-center text-center w-screen min-h-[50vh] p-2"
+    class="flex flex-col justify-center content-center text-center w-screen p-2"
   >
     <div class="mb-4">
       <p class="text-xl">Wellcome to</p>
@@ -16,9 +16,9 @@
   </div>
   <div 
     v-else
-    class="flex justify-center"
+    class="flex justify-center h-full max-h-full"
   >
-    <div class="flex flex-col content-start h-[450px] max-h-[450px] max-w-screen-md w-full px-2">
+    <div class="flex flex-col content-start h-full max-h-full max-w-screen-md w-full px-2">
       <!-- Chat editor title -->
       <div class="">
         <EditorTitleInput 
@@ -28,8 +28,9 @@
         />
       </div>
 
+
       <!-- Chat Editor messages -->
-      <div class="bg-rose-100 p-4 grow max-h-full overflow-auto overscroll-none">
+      <div class="bg-rose-100 p-4 h-full max-h-full overflow-auto overscroll-none">
         <div v-for="(message, index) in messages" :key="index">
           <EditorBubbleInput :text="message"/>
         </div>

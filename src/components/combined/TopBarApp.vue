@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-between w-full">
+  <div class="flex justify-between max-w-full">
     
     <!-- Logo -->
     <router-link to="/">

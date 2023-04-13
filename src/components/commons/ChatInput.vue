@@ -1,7 +1,7 @@
 <template>
   <div class="flex justify-between items-center p-2 bg-white">
     <input
-      class="w-full mr-2 p-2 rounded-lg border-gray-300 focus:outline-none focus:ring-2 focus:ring-rose-500"
+      class="w-full mr-2 p-2 rounded-lg ring-2 ring-rose-200 focus:outline-none focus:ring-rose-500"
       type="text"
       placeholder="Type a message..."
       v-model="message"
