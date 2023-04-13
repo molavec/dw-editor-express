@@ -67,9 +67,6 @@ import { useTexts } from '@/composable/useTexts';
 import DigitalWriterLogo from '../commons/DigitalWriterLogo.vue';
 import ChatDocumentSwitcher from '../commons/ChatDocumentSwitcher.vue';
 
-// -> EMITS
-const emit = defineEmits(['loadText']);
-
 // -> INIT
 const { loadText,  saveText } = useTexts();
 
@@ -77,7 +74,6 @@ const { loadText,  saveText } = useTexts();
 
 const loadHandler = () => {
   loadText();
-  emit('loadText');
 }
 
 const saveHandler = () => {

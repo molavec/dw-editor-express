@@ -1,24 +1,15 @@
 import { storeToRefs } from 'pinia';
-import { useTextStore } from '../stores/textStore';
-import type TextType from '../interfaces/TextType';
-import { ref } from 'vue';
+import { useEditorStore } from '../stores/editorStore';
 
-const isTextLoaded = ref(false);
+
 
 export const useTexts = () => {
-  const textStore = useTextStore();
-  const { activeText } = storeToRefs(textStore);
+  const isChatTypeStore  = useEditorStore();
+  const { isChatTypeActive, title, content, messages } = storeToRefs(isChatTypeStore);
+
+  
 
   //Methods
-  const getActiveText = () => {
-    return activeText;
-  };
-
-  const setActiveText = (text: TextType) => {
-    textStore.setActiveText(text);
-  };
-
-
   const loadText = () => {
     const requestOptions = {
       method: 'GET',
@@ -28,19 +19,29 @@ export const useTexts = () => {
       .then(response => response.text())
       .then(result => {
         console.log(JSON.parse(result));
-        setActiveText(JSON.parse(result));
-        isTextLoaded.value = !isTextLoaded.value;
-        console.log('isTextLoaded.value', isTextLoaded.value);
-        return activeText;
+        const data = JSON.parse(result);
+        title.value = data.title;
+        content.value = data.content;
+        messages.value = content.value.split('\n');
       })
       .catch(error => console.log('error', error));
   };
 
   const saveText = () => {
+
+    if(isChatTypeActive) {
+      content.value = messages.value.join('\n');
+    }
+
+    const data = {
+      title: title.value,
+      content: content.value,
+    }
+
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
-    const raw = JSON.stringify(getActiveText().value);
+    const raw = JSON.stringify(data);
 
     const requestOptions = {
       method: 'POST',
@@ -55,10 +56,6 @@ export const useTexts = () => {
   };
 
   return {
-    isTextLoaded,
-    //Methods
-    getActiveText,
-    setActiveText,
     saveText,
     loadText,
   };
