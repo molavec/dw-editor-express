@@ -4,9 +4,7 @@
     <ContentHeader :title="TITLE" />
     <div class="space-y-6 my-6">
       <!-- image uploader -->
-      <div>
-        
-      </div>
+      
 
       <div>
         <label for="firstname" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
