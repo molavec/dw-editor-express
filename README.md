@@ -9,7 +9,12 @@ Puedes ver el funcionamiento en el video del siguiente enlace:
 https://www.berrycast.com/conversations/53cfee80-182d-55b3-a6ac-80b7a085fb37
 
 
-## how to 
+## Preparación de los datos
+
+Revisar `./server/docker-compose.yml` y `./server/queries.sql` para credenciales y creación de tablas
+
+
+## How to
 
 Ejecutar el cliente web
 
@@ -24,3 +29,4 @@ cd server
 yarn dev
 ```
 
+ 

@@ -1,8 +1,13 @@
 <template>
   <div class="p-2">
-    <ContentHeader :title="TITLE" button-text="Logout" @button-click="logoutActions" />
 
-    <div class="space-y-6">
+    <ContentHeader :title="TITLE" />
+    <div class="space-y-6 my-6">
+      <!-- image uploader -->
+      <div>
+        
+      </div>
+
       <div>
         <label for="firstname" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
           First Name
@@ -33,7 +38,7 @@
       </div>
       <div>
         <label for="alias" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-          Ghost name (alias or pseudonym)
+          Pseudonym (alias)
         </label>
         <input
           :value="alias"
@@ -121,22 +126,6 @@
     </div> 
     -->
 
-    <!-- NFT Info -->
-    <ContentHeader class="mt-4 mb-2" title="NFT Info" />
-    <div class="flex flex-col content-center p-4">
-      <div class="text-center text-2xl my-4">There is not wallet connected yet</div>
-      <div class="flex justify-center w-full text-center">
-        <button
-          type="button"
-          class="flex content-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-        >
-          <div>
-            <img src="../../assets/metatask-logo.png" alt="" class="mr-2" />
-          </div>
-          <div>Connect Wallet</div>
-        </button>
-      </div>
-    </div>
   </div>
 
   <!-- CTAs -->

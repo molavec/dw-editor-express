@@ -6,7 +6,7 @@ import EditorView from '../components/views/EditorView.vue';
 // import PublishedTextView from '../components/views/PublishedTextView.vue';
 // import InfoTextView from '../components/views/InfoTextView.vue';
 // import UserTextListView from '../components/views/UserTextListView.vue';
-// import UserProfileView from '../components/views/UserProfileView.vue';
+import UserProfileView from '../components/views/UserProfileView.vue';
 // import LoginView from '../components/views/LoginView.vue';
 // import RegisterView from '../components/views/RegisterView.vue';
 // import ConnectWalletView from '../components/views/ConnectWalletView.vue';
@@ -22,7 +22,7 @@ const routes: vueRouter.RouteRecordRaw[] = [
   // { path: '/text/:id', name: 'Text', component: PublishedTextView },
   // { path: '/info', name: 'Info', component: InfoTextView },
   // { path: '/texts', name: 'TextList', component: UserTextListView },
-  // { path: '/profile', name: 'Profile', component: UserProfileView },
+  { path: '/profile', name: 'Profile', component: UserProfileView },
   // { path: '/login', name: 'Login', component: LoginView },
   // { path: '/register', name: 'Register', component: RegisterView },
   // { path: '/connect-wallet', name: 'ConnectWallet', component: ConnectWalletView },

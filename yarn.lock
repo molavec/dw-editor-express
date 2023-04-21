@@ -4658,6 +4658,11 @@ vue-eslint-parser@^9.0.0, vue-eslint-parser@^9.0.1:
     lodash "^4.17.21"
     semver "^7.3.6"
 
+vue-profile-avatar@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/vue-profile-avatar/-/vue-profile-avatar-1.2.0.tgz#7920656a402b4679c642ab598978e606d1bca156"
+  integrity sha512-fCNh4yaVTMmgEUakDQe8ff05etqwU3gbgAIxH3s56A/fZRhpUEfEwxUvqHWX5mFPj08XgRBdUWM7IPNWrDGakg==
+
 vue-router@^4.1.6:
   version "4.1.6"
   resolved "https://registry.npmjs.org/vue-router/-/vue-router-4.1.6.tgz"

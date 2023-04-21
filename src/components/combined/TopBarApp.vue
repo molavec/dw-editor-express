@@ -26,8 +26,6 @@
             px-5
             py-2.5
             text-center
-            mr-2
-            mb-2
             dark:border-rose-600
             dark:hover:border-rose-700
             dark:focus:ring-rose-900"
@@ -47,8 +45,6 @@
             px-5
             py-2.5
             text-center
-            mr-2
-            mb-2
             dark:bg-rose-600
             dark:hover:bg-rose-700
             dark:focus:ring-rose-900"
@@ -57,6 +53,19 @@
           Guardar
         </button>
       </div>
+      <div class="flex justify-center items-center px-2">
+        <router-link to="/profile">
+          <ProfileAvatar
+            :username="username"
+            custom-size="36px"
+            :border="false"
+            bg-color="#be123c"
+            image="avatar.jpg"
+            text-color="#ffffff"
+          />
+        </router-link>
+      </div>
+      
     </div>
 
   </div>
@@ -67,11 +76,18 @@ import { useTexts } from '@/composable/useTexts';
 import DigitalWriterLogo from '../commons/DigitalWriterLogo.vue';
 import ChatDocumentSwitcher from '../commons/ChatDocumentSwitcher.vue';
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import ProfileAvatar from 'vue-profile-avatar';
+
+
 // -> INIT
 const { loadText,  saveText } = useTexts();
 
-// -> METHODS
+// -> DATA
+const username = 'username';
 
+// -> METHODS
 const loadHandler = () => {
   loadText();
 }
