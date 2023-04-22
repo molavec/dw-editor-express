@@ -4,12 +4,12 @@
 
     <div v-if="image" class="m-auto w-full">
       <img :src="image" alt="avatar-picture" class="rounded-full h-24 w-24 m-auto"/>
-      <p>Actualizar</p>
+      <p class="text-blue-600 underline">Actualizar</p>
     </div>
 
     <div v-else>
       <PlusCircleIcon class="h-24 text-rose-600 m-auto w-full" />
-      <p>Añadir Avatar</p>
+      <p class="text-blue-600 underline">Añadir Avatar</p>
     </div>
   
   </div>
