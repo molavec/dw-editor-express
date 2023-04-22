@@ -45,7 +45,7 @@ const imageChange = (event: Event) => {
   const form = new FormData();
   form.append('file', event.target?.files[0])
 
-  fetch('http://localhost:3000/upload-avatar', {
+  fetch('http://localhost:3000/avatar', {
     method: 'POST',
     body: form
   }).then((res) => {

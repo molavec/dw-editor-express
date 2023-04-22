@@ -42,7 +42,7 @@ app.post('/text', async (req, res) => {
   res.send(data);    // echo the result back
 })
 
-app.post('/upload-avatar', (req, res) => {
+app.post('/avatar', (req, res) => {
   console.log('req', req);
   // Get the file that was set to our field named "image"
   const { file } = req.files;
