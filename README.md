@@ -4,9 +4,6 @@ Implementación que permite testear el editor exclusivamente comunicando datos a
 
 Crea un editor que almacena información del título y el contenido en una única fila de la tabla `text`.
 
-Puedes ver el funcionamiento en el video del siguiente enlace:
-
-https://www.berrycast.com/conversations/53cfee80-182d-55b3-a6ac-80b7a085fb37
 
 
 ## Preparación de los datos
@@ -28,5 +25,8 @@ Ejecutar el servidor express
 cd server
 yarn dev
 ```
+**Nota:** Se utiliza Bootstrap en el home del servidor de APIs.
+(http://localhost:3000)
+
 
  
