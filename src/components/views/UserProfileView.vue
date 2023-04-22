@@ -160,7 +160,7 @@ const email = ref(getActiveUser().value?.email);
 // const currentPassword = ref('');
 
 const clickBackHandler = () => {
-  router.push('/texts');
+  router.push('/');
 };
 
 const logoutActions = async () => {
