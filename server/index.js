@@ -2,6 +2,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
+const { engine } = require('express-handlebars');
 
 const cors = require('cors');
 
@@ -10,6 +11,10 @@ const DatabaseManager = require('./lib/DatabaseManager');
 const app = express();
 const port = 3000;
 
+
+app.engine('handlebars', engine());
+app.set('view engine', 'handlebars');
+app.set('views', './views');
 
 // Add this line to serve our index.html page
 app.use(express.static('public'));
@@ -25,7 +30,8 @@ app.use(cors({
 }));
 
 app.get('/', (req, res) => {
-  res.send('DigitalWriter.<span style="color: red;">ART</span> on Express JS!');
+  // res.send('DigitalWriter.<span style="color: red;">ART</span> on Express JS!');
+  res.render('home');
 })
 
 app.get('/text', async (req, res) => {

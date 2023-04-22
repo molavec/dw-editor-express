@@ -1,6 +1,9 @@
 # npm
 .npmrc 
 
+# uploads
+server/uploads
+
 # Logs
 logs
 *.log
