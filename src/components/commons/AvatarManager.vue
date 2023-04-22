@@ -41,6 +41,19 @@ const imageChange = (event: Event) => {
 
   image.value = getObjectURL(event.target?.files[0]);
 
+  //TODO: upload to server
+  const form = new FormData();
+  form.append('file', event.target?.files[0])
+
+  fetch('http://localhost:3000/upload-avatar', {
+    method: 'POST',
+    body: form
+  }).then((res) => {
+    console.log(res)
+  }).catch((error)=> {
+    console.log(error)
+  });
+
   console.log(image.value);
 }
 
