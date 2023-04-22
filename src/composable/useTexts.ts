@@ -15,7 +15,7 @@ export const useTexts = () => {
       method: 'GET',
     };
     
-    fetch("http://localhost:3000/load", requestOptions)
+    fetch("http://localhost:3000/text", requestOptions)
       .then(response => response.text())
       .then(result => {
         console.log(JSON.parse(result));
@@ -49,7 +49,7 @@ export const useTexts = () => {
       body: raw,
     };
 
-    fetch("http://localhost:3000/save", requestOptions)
+    fetch("http://localhost:3000/text", requestOptions)
       .then(response => response.text())
       .then(result => console.log(result))
       .catch(error => console.log('error', error));
