@@ -25,6 +25,7 @@ Ejecutar el servidor express
 cd server
 yarn dev
 ```
+
 **Nota:** Se utiliza Bootstrap en el home del servidor de APIs.
 (http://localhost:3000)
 
