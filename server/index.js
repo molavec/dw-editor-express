@@ -26,19 +26,19 @@ app.use(fileUpload());
 
 app.use(cors({
   // origin: ['http://localhost:5173']
-  origin: '*'
+  origin: '*',
 }));
 
 app.get('/', (req, res) => {
   // res.send('DigitalWriter.<span style="color: red;">ART</span> on Express JS!');
   res.render('home');
-})
+});
 
 app.get('/text', async (req, res) => {
   const dbm = await DatabaseManager.getInstance();
   const result = await dbm.load();
   res.send(result);   
-})
+});
 
 app.post('/text', async (req, res) => {
   console.log(req.body);      // your JSON
@@ -46,7 +46,7 @@ app.post('/text', async (req, res) => {
   const dbm = await DatabaseManager.getInstance();
   await dbm.save(data.title, data.content);
   res.send(data);    // echo the result back
-})
+});
 
 app.post('/avatar', (req, res) => {
   console.log('req', req);
@@ -68,5 +68,5 @@ app.post('/avatar', (req, res) => {
 
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+  console.log(`Example app listening on port ${port}`);
+});

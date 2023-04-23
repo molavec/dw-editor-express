@@ -29,12 +29,12 @@ import { PlusCircleIcon } from '@heroicons/vue/24/outline';
 import { ref, type Ref } from 'vue';
 
 const image = ref('');
-const imageInput:  Ref<any> = ref(undefined)
+const imageInput:  Ref<any> = ref(undefined);
 
 
 const clickHandler = () => {
   if (imageInput.value) imageInput.value.click();
-}
+};
 
 const imageChange = (event: Event) => {
   console.log(event);
@@ -43,30 +43,30 @@ const imageChange = (event: Event) => {
 
   //TODO: upload to server
   const form = new FormData();
-  form.append('file', event.target?.files[0])
+  form.append('file', event.target?.files[0]);
 
   fetch('http://localhost:3000/avatar', {
     method: 'POST',
-    body: form
+    body: form,
   }).then((res) => {
-    console.log(res)
+    console.log(res);
   }).catch((error)=> {
-    console.log(error)
+    console.log(error);
   });
 
   console.log(image.value);
-}
+};
 
 const getObjectURL = (file: File) => {
-  let url
+  let url;
   if (window.createObjectURL) { // basic
-    url = window.createObjectURL(file)
+    url = window.createObjectURL(file);
   } else if (window.URL) { // mozilla(firefox)
-    url = window.URL.createObjectURL(file)
+    url = window.URL.createObjectURL(file);
   } else if (window.webkitURL) { // webkit or chrome
-    url = window.webkitURL.createObjectURL(file)
+    url = window.webkitURL.createObjectURL(file);
   }
-  return url
-}
+  return url;
+};
   
 </script>

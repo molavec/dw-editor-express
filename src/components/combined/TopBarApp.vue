@@ -90,10 +90,10 @@ const username = 'username';
 // -> METHODS
 const loadHandler = () => {
   loadText();
-}
+};
 
 const saveHandler = () => {
   saveText();
-}
+};
 
 </script>

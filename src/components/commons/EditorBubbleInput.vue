@@ -31,7 +31,7 @@ const isEditable = ref(false);
 // --> METHOD
 const inputHandler = () => {
 
-}
+};
 
 </script>
 

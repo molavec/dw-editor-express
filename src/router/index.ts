@@ -34,7 +34,8 @@ const routes: vueRouter.RouteRecordRaw[] = [
 // You can pass in additional options here, but let's
 // keep it simple for now.
 const router = vueRouter.createRouter({
-  // 4. Provide the history implementation to use. We are using the hash history for simplicity here.
+  // 4. Provide the history implementation to use. 
+  // We are using the hash history for simplicity here.
   history: vueRouter.createWebHistory(),
   routes, // short for `routes: routes`
 });

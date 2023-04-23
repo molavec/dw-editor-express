@@ -27,7 +27,7 @@ class DatabaseManager {
       database: DATABASE,
       idleTimeoutMillis: 5000,
       max: 20,
-      connectionTimeoutMillis: 2000
+      connectionTimeoutMillis: 2000,
     });
     
   }
@@ -39,16 +39,16 @@ class DatabaseManager {
    * just one instance of each subclass around.
    */
   static async getInstance() {
-      if (!DatabaseManager.instance) {
-        DatabaseManager.instance = new DatabaseManager();
-        const client = await DatabaseManager.instance.pool.connect();
-        DatabaseManager.instance.setClient(client);
-      }
-      return DatabaseManager.instance;
+    if (!DatabaseManager.instance) {
+      DatabaseManager.instance = new DatabaseManager();
+      const client = await DatabaseManager.instance.pool.connect();
+      DatabaseManager.instance.setClient(client);
+    }
+    return DatabaseManager.instance;
   }
 
   setClient(client) {
-    this.client = client
+    this.client = client;
   }
 
   connect() {
@@ -75,7 +75,7 @@ class DatabaseManager {
         name: 'save-text',
         text: queryText,
         values: [title, content],
-      }
+      };
       
       this.client.query(query, (err, res) => {
         if (err) reject(err);
@@ -85,7 +85,7 @@ class DatabaseManager {
         if(res){
           resolve(res.rows[0]);
         } else {
-          reject('Error')
+          reject('Error');
         }
       });
 
@@ -108,7 +108,7 @@ class DatabaseManager {
       name: 'get-text',
       text: queryText,
       values: values,
-    }
+    };
 
     return new Promise ((resolve, reject)=>{
       this.client.query(query, (err, res) => {
@@ -117,7 +117,7 @@ class DatabaseManager {
         if(res){
           resolve(res.rows[0]);
         } else {
-          reject('Error')
+          reject('Error');
         }
       });
     });
