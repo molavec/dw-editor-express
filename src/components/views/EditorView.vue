@@ -32,14 +32,14 @@
 
       <div v-if="isChatTypeActive" class="flex flex-col justify-stretch h-full">
         <!-- Chat Editor messages -->
-        <div class="grow bg-rose-100 p-4 overflow-auto overscroll-none">
+        <div class="grow bg-rose-100 p-4 mb-[20px] overflow-auto overscroll-none">
           <div v-for="(message, index) in messages" :key="index">
             <EditorBubbleInput :text="message"/>
           </div>
         </div>
   
         <!-- Chat editor input -->
-        <div class="">
+        <div class="flex flex-row border-2 fixed bottom-0 left-0 right-0 bg-white">
           <ChatInput @send-message="messageHandler"/>      
         </div>
       </div>

@@ -5,3 +5,9 @@
 
 
 https://codepen.io/xyxiao001/pen/yLooYKg
+
+
+https://pqina.nl/blog/upload-image-with-nodejs/
+
+
+* Ajustar el Layout del chat
