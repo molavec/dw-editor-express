@@ -16,7 +16,7 @@
   </div>
   <div 
     v-else
-    class="flex justify-center h-[75vh] max-h-[75vh]"
+    class="flex justify-center grow"
   >
     <div class="flex flex-col content-start max-w-screen-md w-full px-2">
       <!-- Chat editor title -->
@@ -32,7 +32,7 @@
 
       <div v-if="isChatTypeActive" class="flex flex-col justify-stretch h-full">
         <!-- Chat Editor messages -->
-        <div class="grow bg-rose-100 p-4 mb-[20px] overflow-auto overscroll-none">
+        <div class="grow bg-rose-100 p-4 mb-[60px] overflow-auto overscroll-auto">
           <div v-for="(message, index) in messages" :key="index">
             <EditorBubbleInput :text="message"/>
           </div>
