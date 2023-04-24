@@ -18,7 +18,6 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-
 const message = ref('');
 
 const emit = defineEmits(['sendMessage']);
