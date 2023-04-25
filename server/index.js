@@ -1,7 +1,6 @@
 import express from 'express';
 import fileUpload from 'express-fileupload';
 import cors from 'cors';
-import bodyParser from 'body-parser';
 import hbs from 'express-handlebars';
 
 // routes
@@ -19,9 +18,8 @@ app.engine('handlebars', hbs.engine());
 app.set('view engine', 'handlebars');
 app.set('views', './views');
 
-/* body-parser */
-//TODO: check node version
-app.use(bodyParser.json());
+/* JSON */
+app.use(express.json());
 
 /* express-fileupload */
 app.use(fileUpload());
@@ -38,11 +36,11 @@ app.get('/', (req, res) => {
 });
 
 /* text management */
-app.use('text', text);
+app.use('/text', text);
 
 
 /* user management */
-app.use('user', user);
+app.use('/user', user);
 
 
 app.listen(port, () => {
