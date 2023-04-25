@@ -18,6 +18,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useNotifications } from '../../composable/notifications';
+const { appendNotification } = useNotifications();
 const message = ref('');
 
 const emit = defineEmits(['sendMessage']);
@@ -26,6 +28,7 @@ const sendMessage = () => {
   if (message.value) {
     emit('sendMessage', message.value);
     message.value = '';
+    appendNotification('Mensaje enviado');
   }
 };
 

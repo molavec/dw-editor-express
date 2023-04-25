@@ -164,7 +164,7 @@ import EditorCTAContainer from '../commons/EditorCTAContainer.vue';
 import EditorCTA from '../commons/EditorCTA.vue';
 import AvatarManager from '../commons/AvatarManager.vue';
 
-import { useActiveUser } from '../../composable/useActiveUser';
+import { useActiveUser } from '../../composable/useUsers';
 // import { logoutUser } from '../../firebase/auth';
 import { ref } from 'vue';
 import router from '../../router';

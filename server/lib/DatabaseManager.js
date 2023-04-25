@@ -1,5 +1,5 @@
-/* eslint-disable no-undef */
-const { Pool} = require('pg');
+import pgk from 'pg';
+const { Pool } = pgk;
 
 const HOST = 'localhost';
 const USER = 'root';
@@ -125,5 +125,4 @@ class DatabaseManager {
 
 }
 
-// eslint-disable-next-line no-undef
-module.exports = DatabaseManager;
+export default DatabaseManager;

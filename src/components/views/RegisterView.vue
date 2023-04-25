@@ -159,7 +159,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { useActiveUser } from '../../composable/useActiveUser';
+import { useActiveUser } from '../../composable/useUsers';
 import router from '../../router';
 // import { SignUpUser } from '../../firebase/auth';
 import { useAuth } from '../../composable/useAuth';

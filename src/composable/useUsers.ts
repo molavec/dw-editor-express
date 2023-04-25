@@ -1,30 +1,55 @@
-import { computed } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '../stores/userStore';
 import type UserType from '../interfaces/UserType';
 
 export const useActiveUser = () => {
   const userStore = useUserStore();
-  const { activeUser } = storeToRefs(userStore);
 
-  //computed fullname
-  const fullname = computed(() =>
-    activeUser.value?.firstname !== undefined
-      ? `${activeUser.value.firstname} ${activeUser.value.lastname}`
-      : undefined,
-  );
+  const { activeUser, authUser, users  } = storeToRefs(userStore);
 
   //Methods
+  /* active user */
   const getActiveUser = () => {
     return activeUser;
   };
 
   const getActiveUserFullname = () => {
-    return fullname;
+    return getFullname(activeUser.value?.firstname, activeUser.value?.lastname);
   };
 
-  const createUser = async (email: string, firstname: string, lastname: string, alias?: string) => {
-    //create new user in firestore
+  /* auth user */
+  const getAuthUser = () => {
+    return authUser;
+  };
+
+  const getAuthUserFullname = () => {
+    return getFullname(authUser.value?.firstname, authUser.value?.lastname);
+  };
+
+  /* users */
+  const getUsers = () => {
+    return users;
+  };
+  
+  const getFullname = (firstname: string | undefined, lastname: string | undefined)  => {
+    if(firstname && lastname) return `${firstname} ${lastname}`;
+    if(firstname) return `${firstname}`;
+    if(lastname) return `${lastname}`;
+    return undefined;
+  };
+
+
+  const createUser = async (
+    email: string,
+    password: string,  
+    firstname?: string,
+    lastname?: string,
+    alias?: string,
+    image?: string,
+  ) => {
+
+    // TODO: Create user 
+    // create new user in firestore
     // const userId = await createUserDoc(email, firstname, lastname, alias);
 
     // const user: UserType = {
@@ -35,8 +60,8 @@ export const useActiveUser = () => {
     //   alias: alias,
     // };
 
-    // // set active user in store
-    // userStore.setActiveUser(user);
+    // set auth user in store
+    // userStore.setAuthUser(user);
   };
 
   const updateActiveUser = (user: UserType) => {
@@ -58,24 +83,16 @@ export const useActiveUser = () => {
     // return null;
   };
 
-  const logoutUserTasks = () => {
-    //clean user store
-    userStore.cleanStore();
-  };
 
   return {
-    //Properties
-    activeUser,
-
-    //Computed
-    fullname,
-
     //Methods
     getActiveUser,
     getActiveUserFullname,
+    getAuthUser,
+    getAuthUserFullname,
+    getUsers,
     setActiveUserByEmail,
     createUser,
     updateActiveUser,
-    logoutUserTasks,
   };
 };
