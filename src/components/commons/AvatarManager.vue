@@ -45,6 +45,7 @@ const imageChange = (event: Event) => {
     // Alamacena path para uso en el navegador
     image.value = getObjectURL(target.files[0]);
   
+    // TODO: upload in composable
     // upload image to express server
     const form = new FormData();
     form.append('file', target?.files[0]);
