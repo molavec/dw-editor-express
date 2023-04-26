@@ -39,14 +39,18 @@ const clickHandler = () => {
 const imageChange = (event: Event) => {
   console.log(event);
 
+  //Alamacena path para uso en el navegador
   image.value = getObjectURL(event.target?.files[0]);
 
   //TODO: upload to server
   const form = new FormData();
   form.append('file', event.target?.files[0]);
 
-  fetch('http://localhost:3000/avatar', {
-    method: 'POST',
+  //TODO: añadir id del usuario al post desde el URL
+  form.append('userId', '01');
+
+  fetch('http://localhost:3000/user/avatar', {
+    method: 'PUT',
     body: form,
   }).then((res) => {
     console.log(res);

@@ -2,7 +2,7 @@
 .npmrc 
 
 # uploads
-server/uploads/*
+server/public/uploads/
 
 # Logs
 logs

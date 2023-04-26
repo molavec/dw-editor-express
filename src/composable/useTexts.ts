@@ -1,13 +1,9 @@
 import { storeToRefs } from 'pinia';
 import { useEditorStore } from '../stores/editorStore';
 
-
-
 export const useTexts = () => {
   const isChatTypeStore  = useEditorStore();
   const { isChatTypeActive, title, content, messages } = storeToRefs(isChatTypeStore);
-
-  
 
   //Methods
   const loadText = () => {

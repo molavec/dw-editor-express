@@ -1,27 +1,23 @@
 import { Router } from 'express';
 import UserManager from '../lib/UserManager.js';
 
-import path from 'path';
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 var router = Router();
 
-const tm = new UserManager();
-
 router.get('/:id', async (req, res) => {
+  const tm = new UserManager();
   const result = await tm.getByEmail(req.params.id);
   res.send(result);   
 });
 
 router.get('/email/:email', async (req, res) => {
+  const tm = new UserManager();
   const result = await tm.getByEmail(req.params.email);
-  res.send(result);
+  res.send(result);   
 });
 
 router.post('/', async (req, res) => {
+  const tm = new UserManager();
   //TODO: obtener los parametros del post
   console.log(req.body);      // your JSON
   const data = req.body;
@@ -37,10 +33,7 @@ router.post('/', async (req, res) => {
 });
 
 router.put('/avatar', (req, res) => {
-
-  console.log('req.body', req.body);
-  // const data = req.body;
-
+  console.log('req', req);
   // Get the file that was set to our field named "image"
   const { file } = req.files;
 
@@ -52,7 +45,7 @@ router.put('/avatar', (req, res) => {
 
 
   // Move the uploaded image to our upload folder
-  file.mv(__dirname + '/../public/uploads/' + file.name);
+  file.mv(__dirname + '/public/uploads/' + file.name);
 
   res.sendStatus(200);
 });
