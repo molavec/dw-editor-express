@@ -38,27 +38,30 @@ const clickHandler = () => {
 
 const imageChange = (event: Event) => {
   console.log(event);
+  
+  const target= event.target as HTMLInputElement;
 
-  //Alamacena path para uso en el navegador
-  image.value = getObjectURL(event.target?.files[0]);
-
-  //TODO: upload to server
-  const form = new FormData();
-  form.append('file', event.target?.files[0]);
-
-  //TODO: añadir id del usuario al post desde el URL
-  form.append('userId', '01');
-
-  fetch('http://localhost:3000/user/avatar', {
-    method: 'PUT',
-    body: form,
-  }).then((res) => {
-    console.log(res);
-  }).catch((error)=> {
-    console.log(error);
-  });
-
-  console.log(image.value);
+  if (target.files[0]) {
+    // Alamacena path para uso en el navegador
+    image.value = getObjectURL(target.files[0]);
+  
+    // upload image to express server
+    const form = new FormData();
+    form.append('file', target?.files[0]);
+  
+    //TODO: añadir id del usuario al post desde el URL
+    form.append('userId', '01');
+  
+    fetch('http://localhost:3000/user/avatar', {
+      method: 'PUT',
+      body: form,
+    }).then((res) => {
+      console.log(res);
+    }).catch((error)=> {
+      console.log(error);
+    });
+  }
+  
 };
 
 const getObjectURL = (file: File) => {
