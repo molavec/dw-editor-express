@@ -1,9 +1,9 @@
 import DatabaseManager from './DatabaseManager.js';
 
-class UserManager extends DatabaseManager {
+class UserManager  {
   
   constructor() {
-    super();
+    this.dbm = new DatabaseManager();
   }
 
   create(email, firstname, lastname, alias, image, password) {
@@ -33,7 +33,7 @@ class UserManager extends DatabaseManager {
       };
       
 
-      this.client.query(query, (err, res) => {
+      this.dbm.getPool().query(query, (err, res) => {
         
         if (err) {
           console.log('error', err);

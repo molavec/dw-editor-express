@@ -31,6 +31,21 @@ class DatabaseManager {
     });
   }
 
+  static async getInstance() {
+    if (!DatabaseManager.instance) {
+      DatabaseManager.instance = new DatabaseManager();
+    }
+    return DatabaseManager.instance;
+  }
+
+  getPool() {
+    return this.pool;
+  }
+
+  async connect() {
+    await this.pool.connect();
+  }
+
   end() {
     this.pool.end();
   }

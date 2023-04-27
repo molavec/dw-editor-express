@@ -181,7 +181,7 @@ const onSubmit = async () => {
     return;
   }
 
-  if (password.value || repassword.value) {
+  if (password.value !== repassword.value) {
     //TODO: notification
     return;
   }

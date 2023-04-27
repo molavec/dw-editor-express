@@ -1,6 +1,7 @@
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '../stores/userStore';
 import type UserType from '../interfaces/UserType';
+import { register } from '../lib/express-api/user';
 
 export const useActiveUser = () => {
   const userStore = useUserStore();
@@ -38,7 +39,6 @@ export const useActiveUser = () => {
     return undefined;
   };
 
-
   const createUser = async (
     email: string,
     password: string,  
@@ -48,39 +48,14 @@ export const useActiveUser = () => {
     image?: string,
   ) => {
 
-    // TODO: Create user 
-    // create new user in firestore
-    // const userId = await createUserDoc(email, firstname, lastname, alias);
+    //TODO: JWT resigter
 
-    const user = {
-      email: email,
-      password: password,
-      firstname: firstname,
-      lastname: lastname,
-      alias: alias,
-      image: image,
-    };
-
-    console.log('user', user);
-
-    const options = {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      method: 'POST',
-      body: JSON.stringify(user),
-    };
-
-    fetch('http://localhost:3000/user', options)
-      .then(res => res.json())
-      .then(data => {
-        console.log('data', data);
-      })
-      .catch(err => {
-        console.log('err', err);
-        throw err;
-      });
+    try {
+      register(email, password, firstname, lastname, alias, image);
+    } catch (error) {
+      //TODO: notification error
+      console.log(error);
+    }
 
     // set auth user in store
     // userStore.setAuthUser(user);
@@ -94,6 +69,7 @@ export const useActiveUser = () => {
   };
 
   const setActiveUserByEmail = async (email?: string) => {
+    console.log(email);
     // if (email) {
     //   //get user data from firestore
     //   const user = await getUserByEmail(email);
