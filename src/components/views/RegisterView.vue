@@ -149,7 +149,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { useActiveUser } from '../../composable/useUsers';
+import { useUsers } from '../../composable/users';
 import router from '../../router';
 // import { SignUpUser } from '../../firebase/auth';
 // import { useAuth } from '../../composable/useAuth';
@@ -197,7 +197,7 @@ const onSubmit = async () => {
     // setAuth(authUser);
 
     //create user with composable function
-    const { signUp } = useActiveUser();
+    const { signUp } = useUsers();
     const result = await signUp(
       email.value,
       password.value,

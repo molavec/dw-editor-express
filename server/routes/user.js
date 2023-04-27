@@ -3,6 +3,7 @@ import UserManager from '../lib/UserManager.js';
 
 import path from 'path';
 import { fileURLToPath } from 'url';
+import bcrypt from 'bcrypt';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -32,6 +33,10 @@ router.post('/register', async (req, res) => {
     return res.status(400).json({error: 'Email ya registrado'});
   }
 
+  // hash password with bcrypt
+  const saltRounds = 10;
+  const hashedPassword = bcrypt.hashSync(data.password, saltRounds);
+
   //create usuario
   const data = req.body;
   const result = await um.create(
@@ -40,9 +45,28 @@ router.post('/register', async (req, res) => {
     data.lastname,
     data.alias,
     data.image,
-    data.password,
+    hashedPassword,
   );
   res.send(result);
+
+});
+
+router.post('/login', async (req, res) => {
+  //TODO: obtener los parametros del post
+  // console.log('req.body', req.body); // your JSON
+
+  // check if email is already registered
+  const user = await um.getByEmail(req.body.email);
+  
+  if (!user) {
+    return res.status(400).json({error: 'Usuario no encontrado'});
+  }
+
+  // compara la contraseña con la que se envía
+  const validPassword = await bcrypt.compare(req.body.password, user.password);
+  if (!validPassword) return res.status(400).json({ error: 'contraseña no válida' });
+  
+  res.send(user);
 
 });
 

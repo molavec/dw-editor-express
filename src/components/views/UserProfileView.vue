@@ -164,7 +164,7 @@ import EditorCTAContainer from '../commons/EditorCTAContainer.vue';
 import EditorCTA from '../commons/EditorCTA.vue';
 import AvatarManager from '../commons/AvatarManager.vue';
 
-import { useActiveUser } from '../../composable/useUsers';
+import { useUsers } from '../../composable/users';
 // import { logoutUser } from '../../firebase/auth';
 import { ref } from 'vue';
 import router from '../../router';
@@ -173,7 +173,7 @@ const TITLE = 'Profile';
 const backText = '< Back';
 
 // input reactive variables
-const { getActiveUser } = useActiveUser();
+const { getActiveUser } = useUsers();
 const firstname = ref(getActiveUser().value?.firstname);
 const lastname = ref(getActiveUser().value?.lastname);
 const alias = ref(getActiveUser().value?.alias);

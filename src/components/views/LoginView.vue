@@ -21,7 +21,7 @@
               class="
                 bg-gray-50 border border-gray-300
                 text-gray-900 text-sm rounded-lg
-                focus:ring-blue-500 focus:border-blue-500 
+                focus:ring-rose-500 focus:border-rose-500 
                 block w-full p-2.5"
               placeholder="name@company.com"
               required
@@ -42,7 +42,7 @@
               placeholder="••••••••"
               class="
               bg-gray-50 border border-gray-300 text-gray-900
-                text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 
+                text-sm rounded-lg focus:ring-rose-500 focus:border-rose-500 
                 block w-full p-2.5"
               required
             />
@@ -57,8 +57,8 @@
                   value=""
                   class="
                     w-4 h-4 bg-gray-50 rounded border border-gray-300
-                    focus:ring-3 focus:ring-blue-300 dark:bg-gray-600
-                    dark:border-gray-500 dark:focus:ring-blue-600 
+                    focus:ring-3 focus:ring-rose-300 dark:bg-gray-600
+                    dark:border-gray-500 dark:focus:ring-rose-600 
                     dark:ring-offset-gray-800"
                   required
                 />
@@ -69,7 +69,7 @@
                 >Remember me</label
               >
             </div>
-            <a href="#" class="text-sm text-blue-700 hover:underline dark:text-blue-500"
+            <a href="#" class="text-sm text-rose-700 hover:underline dark:text-rose-500"
               >Lost Password?</a
             >
           </div> 
@@ -81,16 +81,16 @@
           <button
             type="submit"
             class="
-              w-full text-white bg-blue-700
-            hover:bg-blue-800 focus:ring-4 focus:outline-none
-            focus:ring-blue-300 font-medium rounded-lg text-sm 
+              w-full text-white bg-rose-700
+            hover:bg-rose-800 focus:ring-4 focus:outline-none
+            focus:ring-rose-300 font-medium rounded-lg text-sm 
               px-5 py-2.5 text-center"
           >
             Login Now
           </button>
           <div class="text-sm font-medium text-gray-500">
             Not registered?
-            <router-link to="/register" class="text-blue-700 hover:underline">
+            <router-link to="/register" class="text-rose-700 hover:underline">
               Create account
             </router-link>
           </div>
@@ -102,10 +102,12 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { useActiveUser } from '../../composable/useUsers';
+import { useUsers } from '../../composable/users';
 import router from '../../router';
 // import { signInUser } from '../../firebase/auth';
 // import { useAuth } from '../../composable/useAuth';
+
+import { useNotifications } from '../../composable/notifications';
 
 // input reactive variables
 const email = ref('');
@@ -115,6 +117,8 @@ const password = ref('');
 const requiredFields = ref(false);
 const registerError = ref(false);
 const errorMessage = ref('');
+
+const { appendNotification } = useNotifications();
 
 const onSubmit = async () => {
   if (email.value === '' || password.value === '') {
@@ -129,26 +133,24 @@ const onSubmit = async () => {
     // setAuth(loginUser);
 
     //getUser Info from firestore;
-    const { activeUser, setActiveUserByEmail } = useActiveUser();
-    await setActiveUserByEmail(email.value);
+    const { signIn } = useUsers();
+    const result = await signIn(email.value, password.value);
 
-    console.log(activeUser.value);
+    if(result.error){
+      appendNotification(result.error);
+    }
 
     //If all is ok, return to editor
-    // TODO: if acitveText is not null go to editor else text list
-    router.push('/');
+    if(result.id) {
+      appendNotification('Bienvenido!');
+      router.push('/');
+    }
+
+    // console.log(activeUser.value);
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
-    console.log('err' + error.code);
-    registerError.value = true;
-    if (error.code === 'auth/wrong-password') {
-      errorMessage.value = 'Passwords does not Match';
-    } else if (error.code === 'auth/user-not-found') {
-      errorMessage.value = 'User not found';
-    } else {
-      errorMessage.value = error.code;
-    }
+    console.log('error',  error.code);
   }
 };
 </script>

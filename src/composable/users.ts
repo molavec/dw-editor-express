@@ -1,9 +1,9 @@
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '../stores/userStore';
 import type UserType from '../interfaces/UserType';
-import { register } from '../lib/express-api/user';
+import { register, login } from '../lib/express-api/user';
 
-export const useActiveUser = () => {
+export const useUsers = () => {
   const userStore = useUserStore();
 
   const { activeUser, authUser, users  } = storeToRefs(userStore);
@@ -62,6 +62,26 @@ export const useActiveUser = () => {
     // userStore.setAuthUser(user);
   };
 
+  const signIn = async (
+    email: string,
+    password: string,
+  ) => {
+
+    
+    try {
+      const response = await login(email, password);
+      return response;
+    } catch (error) {
+      //TODO: notification error
+      console.log(error);
+    }
+    
+    //TODO: JWT login
+
+    // set auth user in store
+    // userStore.setAuthUser(user);
+  };
+
   const updateActiveUser = (user: UserType) => {
     // TODO: update user in firestore
 
@@ -92,6 +112,7 @@ export const useActiveUser = () => {
     getUsers,
     setActiveUserByEmail,
     signUp,
+    signIn,
     updateActiveUser,
   };
 };

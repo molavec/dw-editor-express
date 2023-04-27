@@ -1,5 +1,4 @@
 import DatabaseManager from './DatabaseManager.js';
-import bcrypt from 'bcrypt';
 
 class UserManager  {
   
@@ -7,11 +6,8 @@ class UserManager  {
     this.dbm = new DatabaseManager();
   }
 
-  create(email, firstname, lastname, alias, image, password) {
+  create(email, firstname, lastname, alias, image, hashedPassword) {
 
-    // hash password with bcrypt
-    const saltRounds = 10;
-    const hashedPassword = bcrypt.hashSync(password, saltRounds);
 
     //query build
     const queryText = `
@@ -46,17 +42,6 @@ class UserManager  {
     });
   }
 
-  async checkCredentials(email, password) {
-
-    // get user by email
-    const user = await this.getByEmail(email);
-    
-    // compare password with bcrypt
-    const validPassword = await bcrypt.compare(password, user.password);
-    return validPassword;
-
-  }
-
   getById(id){
     const queryText = `
       select
@@ -84,7 +69,7 @@ class UserManager  {
     });
   }
 
-  getByEmail(email){
+  async getByEmail(email){
     const queryText = `
       select
         * 
@@ -100,16 +85,13 @@ class UserManager  {
       name: 'get-user-by-email',
       text: queryText,
       values: values,
-    };
+    }; 
 
     return new Promise ((resolve, reject)=>{
 
       this.dbm.getPool().query(query, (err, res) => {
-        if (err) {
-          console.log('err', err);
-          reject(err);
-        }
-        console.log('res', res);
+        if (err) reject(err);
+        
         resolve(res.rows[0]);
       });
     });
