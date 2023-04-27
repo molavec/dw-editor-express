@@ -39,17 +39,22 @@ class UserManager  {
     return new Promise ((resolve, reject) => {
 
       this.dbm.getPool().query(query, (err, res) => {
-        
-        if (err) {
-          console.log('error', err);
-          reject(err);
-        }
-        
+        if (err) reject(err);
         resolve(res.rows[0]);
       });
-      
 
     });
+  }
+
+  async checkCredentials(email, password) {
+
+    // get user by email
+    const user = await this.getByEmail(email);
+    
+    // compare password with bcrypt
+    const validPassword = await bcrypt.compare(password, user.password);
+    return validPassword;
+
   }
 
   getById(id){
@@ -57,7 +62,7 @@ class UserManager  {
       select
         * 
       from 
-        text 
+        dw_user 
       where 
         id=$1;
     `;
@@ -71,20 +76,10 @@ class UserManager  {
     };
 
     return new Promise ((resolve, reject)=>{
-      
-      this.client.connect();
 
-      this.client.query(query, (err, res) => {
+      this.dbm.getPool().query(query, (err, res) => {
         if (err) reject(err);
-
-        if(res){
-          resolve(res.rows[0]);
-        } else {
-          reject('Error');
-        }
-        
-        this.client.end();
-
+        resolve(res.rows[0]);
       });
     });
   }
@@ -94,7 +89,7 @@ class UserManager  {
       select
         * 
       from 
-        text 
+        dw_user
       where 
         email=$1;
     `;
@@ -108,20 +103,14 @@ class UserManager  {
     };
 
     return new Promise ((resolve, reject)=>{
-      
-      this.client.connect();
 
-      this.client.query(query, (err, res) => {
-        if (err) reject(err);
-
-        if(res){
-          resolve(res.rows[0]);
-        } else {
-          reject('Error');
+      this.dbm.getPool().query(query, (err, res) => {
+        if (err) {
+          console.log('err', err);
+          reject(err);
         }
-        
-        this.client.end();
-
+        console.log('res', res);
+        resolve(res.rows[0]);
       });
     });
   }

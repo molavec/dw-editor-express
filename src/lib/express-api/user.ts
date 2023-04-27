@@ -26,7 +26,7 @@ const register = (
   };
 
   return new Promise((resolve, reject) => {
-    fetch('http://localhost:3000/user', options)
+    fetch('http://localhost:3000/user/register', options)
       .then((res) => res.json())
       .then((data) => {
         console.log('data', data);

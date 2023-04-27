@@ -9,23 +9,32 @@ const __dirname = path.dirname(__filename);
 
 var router = Router();
 
-const tm = new UserManager();
+const um = new UserManager();
 
 router.get('/:id', async (req, res) => {
-  const result = await tm.getByEmail(req.params.id);
+  const result = await um.getByEmail(req.params.id);
   res.send(result);   
 });
 
 router.get('/email/:email', async (req, res) => {
-  const result = await tm.getByEmail(req.params.email);
+  const result = await um.getByEmail(req.params.email);
   res.send(result);
 });
 
-router.post('/', async (req, res) => {
+router.post('/register', async (req, res) => {
   //TODO: obtener los parametros del post
-  // console.log('req.body', req.body);      // your JSON
+  // console.log('req.body', req.body); // your JSON
+
+  // check if email is already registered
+  const isEmailExist = await um.getByEmail(req.body.email);
+  console.log('isEmailExist', isEmailExist);
+  if (isEmailExist) {
+    return res.status(400).json({error: 'Email ya registrado'});
+  }
+
+  //create usuario
   const data = req.body;
-  const result = await tm.create(
+  const result = await um.create(
     data.email,
     data.firstname,
     data.lastname,
@@ -49,7 +58,6 @@ router.put('/avatar', (req, res) => {
   
   // If does not have image mime type prevent from upl  oading
   //if (/^image/.test(image.mimetype)) return res.sendStatus(400);
-
 
   // Move the uploaded image to our upload folder
   file.mv(__dirname + '/../public/uploads/' + file.name);
