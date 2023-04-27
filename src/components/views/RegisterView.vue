@@ -207,7 +207,7 @@ const onSubmit = async () => {
     );
 
     if(result.error){
-      appendNotification('Correo ya utilizado. Introduce ucorreo distinto.');
+      appendNotification(result.error);
     }
 
     //If all is ok, return to editor
