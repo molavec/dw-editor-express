@@ -16,4 +16,7 @@ create table dw_text (
   CONSTRAINT fk_user FOREIGN KEY(userId) REFERENCES dw_user(id)
 );
 
-select * from text;
+select * from dw_user;
+select * from dw_text;
+
+DELETE FROM dw_user WHERE email like '%miguel@queonda.art%';

@@ -150,7 +150,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useActiveUser } from '../../composable/useUsers';
-// import router from '../../router';
+import router from '../../router';
 // import { SignUpUser } from '../../firebase/auth';
 // import { useAuth } from '../../composable/useAuth';
 
@@ -206,13 +206,15 @@ const onSubmit = async () => {
       alias.value,
     );
 
-    console.log('result', result);
     if(result.error){
-      appendNotification('Correo ya utilizado. Introduce un correo distinto.');
+      appendNotification('Correo ya utilizado. Introduce ucorreo distinto.');
     }
 
     //If all is ok, return to editor
-    //router.push('/');
+    if(result.id) {
+      appendNotification('Usuario creado exitósamente!');
+      router.push('/');
+    }
 
   } catch (error: any) {
     //TODO: notification
