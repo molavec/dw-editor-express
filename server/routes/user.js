@@ -23,7 +23,7 @@ router.get('/email/:email', async (req, res) => {
 
 router.post('/', async (req, res) => {
   //TODO: obtener los parametros del post
-  console.log(req.body);      // your JSON
+  console.log('req.body', req.body);      // your JSON
   const data = req.body;
   const result = await tm.create(
     data.email,

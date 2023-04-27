@@ -52,13 +52,35 @@ export const useActiveUser = () => {
     // create new user in firestore
     // const userId = await createUserDoc(email, firstname, lastname, alias);
 
-    // const user: UserType = {
-    //   id: userId,
-    //   email: email,
-    //   firstname: firstname,
-    //   lastname: lastname,
-    //   alias: alias,
-    // };
+    const user = {
+      email: email,
+      password: password,
+      firstname: firstname,
+      lastname: lastname,
+      alias: alias,
+      image: image,
+    };
+
+    console.log('user', user);
+
+    const options = {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+      body: JSON.stringify(user),
+    };
+
+    fetch('http://localhost:3000/user', options)
+      .then(res => res.json())
+      .then(data => {
+        console.log('data', data);
+      })
+      .catch(err => {
+        console.log('err', err);
+        throw err;
+      });
 
     // set auth user in store
     // userStore.setAuthUser(user);

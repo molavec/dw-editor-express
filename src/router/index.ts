@@ -7,8 +7,8 @@ import EditorView from '../components/views/EditorView.vue';
 // import InfoTextView from '../components/views/InfoTextView.vue';
 // import UserTextListView from '../components/views/UserTextListView.vue';
 import UserProfileView from '../components/views/UserProfileView.vue';
-// import LoginView from '../components/views/LoginView.vue';
-// import RegisterView from '../components/views/RegisterView.vue';
+import LoginView from '../components/views/LoginView.vue';
+import RegisterView from '../components/views/RegisterView.vue';
 // import ConnectWalletView from '../components/views/ConnectWalletView.vue';
 // import PublishView from '../components/views/PublishView.vue';
 
@@ -23,8 +23,8 @@ const routes: vueRouter.RouteRecordRaw[] = [
   // { path: '/info', name: 'Info', component: InfoTextView },
   // { path: '/texts', name: 'TextList', component: UserTextListView },
   { path: '/profile', name: 'Profile', component: UserProfileView },
-  // { path: '/login', name: 'Login', component: LoginView },
-  // { path: '/register', name: 'Register', component: RegisterView },
+  { path: '/login', name: 'Login', component: LoginView },
+  { path: '/register', name: 'Register', component: RegisterView },
   // { path: '/connect-wallet', name: 'ConnectWallet', component: ConnectWalletView },
   // { path: '/publish', name: 'publish', component: PublishView },
   // { path: '/:pathMatch(.*)*', name: 'NotFound', component: HomeView },

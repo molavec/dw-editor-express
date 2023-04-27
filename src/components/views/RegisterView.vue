@@ -2,14 +2,14 @@
   <!-- Main modal -->
   <div class="flex justify-center w-full h-full p-5">
     <!-- Modal content -->
-    <div class="bg-white rounded-lg border-2 border-grey-300 shadow dark:bg-gray-700 min-w-[50%]">
+    <div class="bg-white rounded-lg border-2 border-grey-300 shadow min-w-[50%]">
       <div class="py-6 px-6 lg:px-8">
-        <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Sign in writer!</h3>
+        <h3 class="mb-4 text-xl font-medium text-gray-900">Sign in writer!</h3>
         <form class="space-y-6" @submit.prevent="onSubmit">
           <div>
             <label
               for="firstname"
-              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              class="block mb-2 text-sm font-medium text-gray-900"
             >
               First Name<span class="text-red-600">*</span>
             </label>
@@ -21,9 +21,7 @@
               id="firstname"
               class="
               bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
-              focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5
-              dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400
-              dark:text-white"
+              focus:ring-rose-500 focus:border-rose-500 block w-full p-2.5"
               placeholder="Firstname"
               required
             />
@@ -31,7 +29,7 @@
           <div>
             <label
               for="lastname"
-              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              class="block mb-2 text-sm font-medium text-gray-900"
             >
               Last Name<span class="text-red-600">*</span>
             </label>
@@ -43,15 +41,13 @@
               id="lastname"
               class="
                 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
-                focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 
-                dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 
-                dark:text-white"
+                focus:ring-rose-500 focus:border-rose-500 block w-full p-2.5"
               placeholder="Lastname"
               required
             />
           </div>
           <div>
-            <label for="alias" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            <label for="alias" class="block mb-2 text-sm font-medium text-gray-900">
               Ghost name (alias or pseudonym)
             </label>
             <input
@@ -62,13 +58,12 @@
               id="alias"
               class="
                 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
-                focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 
-                dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                focus:ring-rose-500 focus:border-rose-500 block w-full p-2.5"
               placeholder="Awesome Writer"
             />
           </div>
           <div>
-            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            <label for="email" class="block mb-2 text-sm font-medium text-gray-900">
               Your email<span class="text-red-600">*</span>
             </label>
             <input
@@ -79,9 +74,7 @@
               id="email"
               class="
                 bg-gray-50 border border-gray-300 text-gray-900 text-sm 
-                rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5
-                dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400
-                dark:text-white"
+                rounded-lg focus:ring-rose-500 focus:border-rose-500 block w-full p-2.5"
               placeholder="name@company.com"
               required
             />
@@ -89,7 +82,7 @@
           <div>
             <label
               for="password"
-              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              class="block mb-2 text-sm font-medium text-gray-900"
             >
               Your password<span class="text-red-600">*</span>
             </label>
@@ -102,16 +95,15 @@
               placeholder="••••••••"
               class="
                 bg-gray-50 border border-gray-300 text-gray-900 
-                text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 
-                block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500
-                dark:placeholder-gray-400 dark:text-white"
+                text-sm rounded-lg focus:ring-rose-500 focus:border-rose-500 
+                block w-full p-2.5"
               required
             />
           </div>
           <div>
             <label
               for="repassword"
-              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              class="block mb-2 text-sm font-medium text-gray-900"
             >
               Repeat your password<span class="text-red-600">*</span>
             </label>
@@ -124,9 +116,8 @@
               placeholder="••••••••"
               class="
                 bg-gray-50 border border-gray-300 text-gray-900 
-                text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500
-                block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500
-                dark:placeholder-gray-400 dark:text-white"
+                text-sm rounded-lg focus:ring-rose-500 focus:border-rose-500
+                block w-full p-2.5"
               required
             />
           </div>
@@ -138,16 +129,15 @@
           <button
             type="submit"
             class="
-              w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 
-              focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm
-              px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700
-              dark:focus:ring-blue-800"
+              w-full text-white bg-rose-700 hover:bg-rose-800 focus:ring-4 
+              focus:outline-none focus:ring-rose-300 font-medium rounded-lg text-sm
+              px-5 py-2.5 text-center"
           >
             Create Account
           </button>
-          <div class="text-sm font-medium text-gray-500 dark:text-gray-300">
+          <div class="text-sm font-medium text-gray-500">
             Already registered?
-            <router-link to="/login" class="text-blue-700 hover:underline dark:text-blue-500">
+            <router-link to="/login" class="text-rose-700 hover:underline">
               Sign in
             </router-link>
           </div>
@@ -160,9 +150,9 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useActiveUser } from '../../composable/useUsers';
-import router from '../../router';
+// import router from '../../router';
 // import { SignUpUser } from '../../firebase/auth';
-import { useAuth } from '../../composable/useAuth';
+// import { useAuth } from '../../composable/useAuth';
 
 // input reactive variables
 const firstname = ref('');
@@ -179,7 +169,7 @@ const registerError = ref(false);
 const errorMessage = ref('');
 
 const onSubmit = async () => {
-  //Check conditions
+  //Check required
   if (
     firstname.value === '' ||
     lastname.value === '' ||
@@ -187,7 +177,12 @@ const onSubmit = async () => {
     password.value === '' ||
     repassword.value === ''
   ) {
-    requiredFields.value = true;
+    //TODO: notification
+    return;
+  }
+
+  if (password.value || repassword.value) {
+    //TODO: notification
     return;
   }
 
@@ -199,20 +194,13 @@ const onSubmit = async () => {
 
     //create user with composable function
     const { createUser } = useActiveUser();
-    createUser(email.value, firstname.value, lastname.value, alias.value);
+    createUser(email.value, password.value, firstname.value, lastname.value, alias.value);
 
     //If all is ok, return to editor
-    router.push('/');
+    //router.push('/');
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
-    registerError.value = true;
-
-    if (error.code === 'auth/email-already-in-use') {
-      errorMessage.value = 'Email already in use.';
-    } else {
-      errorMessage.value = error.message;
-    }
+    //TODO: notification
   }
 };
 </script>

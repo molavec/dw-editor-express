@@ -32,22 +32,21 @@ class UserManager extends DatabaseManager {
         values: [email, firstname, lastname, alias, image, password],
       };
       
-      this.client.connect();
 
       this.client.query(query, (err, res) => {
-        if (err) reject(err);
+        
+        if (err) {
+          console.log('error', err);
+          reject(err);
+        } 
 
-        // console.log('res', res);
-        // this.client.release();
+        console.log('res', res);
+
         if(res){
           resolve(res.rows[0]);
-        } else {
-          reject('Error');
         }
-
-        this.client.end();
-
       });
+      
 
     });
   }

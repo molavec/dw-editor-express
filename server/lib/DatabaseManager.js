@@ -1,5 +1,5 @@
 import pg from 'pg';
-const { Client } = pg;
+const { Pool } = pg;
 
 const HOST = 'localhost';
 const USER = 'root';
@@ -19,7 +19,7 @@ class DatabaseManager {
    * construction calls with the `new` operator.
    */
   constructor() {
-    this.client = new Client({
+    this.pool = new Pool({
       host: HOST,
       user: USER,
       password: PASSWORD,
@@ -31,12 +31,8 @@ class DatabaseManager {
     });
   }
 
-  connect() {
-    this.client.connect();
-  }
-
   end() {
-    this.client.end();
+    this.pool.end();
   }
 
 }

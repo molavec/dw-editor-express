@@ -41,7 +41,7 @@ const imageChange = (event: Event) => {
   
   const target= event.target as HTMLInputElement;
 
-  if (target.files[0]) {
+  if (target.files) {
     // Alamacena path para uso en el navegador
     image.value = getObjectURL(target.files[0]);
   
