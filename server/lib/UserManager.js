@@ -1,4 +1,5 @@
 import DatabaseManager from './DatabaseManager.js';
+import bcrypt from 'bcrypt';
 
 class UserManager  {
   
@@ -8,43 +9,43 @@ class UserManager  {
 
   create(email, firstname, lastname, alias, image, password) {
 
+    // hash password with bcrypt
+    const saltRounds = 10;
+    const hashedPassword = bcrypt.hashSync(password, saltRounds);
+
+    //query build
+    const queryText = `
+      insert into dw_user 
+        (
+          email, 
+          firstname,
+          lastname,
+          alias,
+          image,
+          password
+        ) 
+      values 
+        ($1, $2, $3, $4, $5, $6)
+      returning *;
+    `;
+
+    const query = {
+      // give the query a unique name
+      name: 'create-user',
+      text: queryText,
+      values: [email, firstname, lastname, alias, image, hashedPassword],
+    };
+
     return new Promise ((resolve, reject) => {
-
-      const queryText = `
-        insert into dw_user 
-          (
-            email, 
-            firstname,
-            lastname,
-            alias,
-            image,
-            password
-          ) 
-        values 
-          ($1, $2, $3, $4, $5, $6)
-        returning *;
-      `;
-
-      const query = {
-        // give the query a unique name
-        name: 'create-user',
-        text: queryText,
-        values: [email, firstname, lastname, alias, image, password],
-      };
-      
 
       this.dbm.getPool().query(query, (err, res) => {
         
         if (err) {
           console.log('error', err);
           reject(err);
-        } 
-
-        console.log('res', res);
-
-        if(res){
-          resolve(res.rows[0]);
         }
+        
+        resolve(res.rows[0]);
       });
       
 
