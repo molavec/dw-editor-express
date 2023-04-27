@@ -43,6 +43,7 @@ router.post('/register', async (req, res) => {
     data.password,
   );
   res.send(result);
+
 });
 
 router.put('/avatar', (req, res) => {

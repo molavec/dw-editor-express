@@ -29,7 +29,7 @@ const register = (
     fetch('http://localhost:3000/user/register', options)
       .then((res) => res.json())
       .then((data) => {
-        console.log('data', data);
+        //console.log('data', data);
         resolve(data);
       })
       .catch((error) => {

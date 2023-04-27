@@ -39,7 +39,7 @@ export const useActiveUser = () => {
     return undefined;
   };
 
-  const createUser = async (
+  const signUp = async (
     email: string,
     password: string,  
     firstname?: string,
@@ -51,7 +51,8 @@ export const useActiveUser = () => {
     //TODO: JWT resigter
 
     try {
-      register(email, password, firstname, lastname, alias, image);
+      const response = await register(email, password, firstname, lastname, alias, image);
+      return response;
     } catch (error) {
       //TODO: notification error
       console.log(error);
@@ -90,7 +91,7 @@ export const useActiveUser = () => {
     getAuthUserFullname,
     getUsers,
     setActiveUserByEmail,
-    createUser,
+    signUp,
     updateActiveUser,
   };
 };

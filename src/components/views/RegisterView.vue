@@ -154,6 +154,8 @@ import { useActiveUser } from '../../composable/useUsers';
 // import { SignUpUser } from '../../firebase/auth';
 // import { useAuth } from '../../composable/useAuth';
 
+import { useNotifications } from '../../composable/notifications';
+
 // input reactive variables
 const firstname = ref('');
 const lastname = ref('');
@@ -167,6 +169,8 @@ const requiredFields = ref(false);
 const passwordsDoesNotMatch = ref(false);
 const registerError = ref(false);
 const errorMessage = ref('');
+
+const { appendNotification } = useNotifications();
 
 const onSubmit = async () => {
   //Check required
@@ -193,14 +197,26 @@ const onSubmit = async () => {
     // setAuth(authUser);
 
     //create user with composable function
-    const { createUser } = useActiveUser();
-    createUser(email.value, password.value, firstname.value, lastname.value, alias.value);
+    const { signUp } = useActiveUser();
+    const result = await signUp(
+      email.value,
+      password.value,
+      firstname.value,
+      lastname.value,
+      alias.value,
+    );
+
+    console.log('result', result);
+    if(result.error){
+      appendNotification('Correo ya utilizado. Introduce un correo distinto.');
+    }
 
     //If all is ok, return to editor
     //router.push('/');
 
   } catch (error: any) {
     //TODO: notification
+    console.log('error', error);
   }
 };
 </script>
