@@ -54,16 +54,28 @@
         </button>
       </div>
       <div class="flex justify-center items-center px-2">
-        <router-link to="/profile">
+        
+        <router-link v-if="user" to="/profile">
           <ProfileAvatar
-            :username="username"
-            custom-size="36px"
+            :username="user.alias || user.firstname"
+            :image="user.image"
             :border="false"
+            custom-size="36px"
             bg-color="#be123c"
-            image="avatar.jpg"
             text-color="#ffffff"
           />
         </router-link>
+        <router-link v-else to="/login">
+          <ProfileAvatar
+            image="avatar.png"
+            custom-size="36px"
+            bg-color="#ffffff"
+            text-color="#ffffff"
+            border-color="#be123c"
+            :border="false"
+          />
+        </router-link>
+
       </div>
       
     </div>
@@ -72,7 +84,8 @@
 </template>
 
 <script setup lang="ts">
-import { useTexts } from '@/composable/texts';
+import { useTexts } from '../../composable/texts';
+import { useUsers } from '../../composable/users';
 import DigitalWriterLogo from '../commons/DigitalWriterLogo.vue';
 import ChatDocumentSwitcher from '../commons/ChatDocumentSwitcher.vue';
 
@@ -83,9 +96,10 @@ import ProfileAvatar from 'vue-profile-avatar';
 
 // -> INIT
 const { loadText,  saveText } = useTexts();
+const { getAuthUser } = useUsers();
 
 // -> DATA
-const username = 'username';
+const user = getAuthUser();
 
 // -> METHODS
 const loadHandler = () => {
