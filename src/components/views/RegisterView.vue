@@ -155,6 +155,7 @@ import router from '../../router';
 // import { useAuth } from '../../composable/useAuth';
 
 import { useNotifications } from '../../composable/notifications';
+import type UserType from '@/interfaces/UserType';
 
 // input reactive variables
 const firstname = ref('');
@@ -197,8 +198,8 @@ const onSubmit = async () => {
     // setAuth(authUser);
 
     //create user with composable function
-    const { signUp } = useUsers();
-    const result = await signUp(
+    const { signUp, setAuthUser } = useUsers();
+    const result:any = await signUp(
       email.value,
       password.value,
       firstname.value,
@@ -212,7 +213,20 @@ const onSubmit = async () => {
 
     //If all is ok, return to editor
     if(result.id) {
+
       appendNotification('Usuario creado exitósamente!');
+      
+      const user: UserType = {
+        id: result.id,
+        email: result.email,
+        firstname: result.firstname,
+        lastname: result.lastname,
+        alias: result.alias,
+        image: result.image,
+        token: result.token,
+      };
+      setAuthUser(user);
+
       router.push('/');
     }
 
