@@ -108,6 +108,7 @@ import router from '../../router';
 // import { useAuth } from '../../composable/useAuth';
 
 import { useNotifications } from '../../composable/notifications';
+import type UserType from '@/interfaces/UserType';
 
 // input reactive variables
 const email = ref('');
@@ -133,8 +134,8 @@ const onSubmit = async () => {
     // setAuth(loginUser);
 
     //getUser Info from firestore;
-    const { signIn } = useUsers();
-    const result = await signIn(email.value, password.value);
+    const { signIn, setAuthUser } = useUsers();
+    const result:any = await signIn(email.value, password.value);
 
     if(result.error){
       appendNotification(result.error);
@@ -143,6 +144,16 @@ const onSubmit = async () => {
     //If all is ok, return to editor
     if(result.id) {
       appendNotification('Bienvenido!');
+      const user: UserType = {
+        id: result.id,
+        email: result.email,
+        firstname: result.firstname,
+        lastname: result.lastname,
+        alias: result.alias,
+        image: result.image,
+        token: result.token,
+      };
+      setAuthUser(user);
       router.push('/');
     }
 

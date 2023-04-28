@@ -5,7 +5,7 @@ interface UserType {
   lastname?: string | undefined,
   alias?: string | undefined,
   image?: string,
-  walletAddress?: string,
+  token?: string,
 }
 
 export default UserType;

@@ -29,11 +29,18 @@
 
 <script setup lang="ts">
 import router from '@/router';
+import { useUsers } from '../../composable/users';
+
 import { SemipolarSpinner } from 'epic-spinners';
 
+const { getAuthUser } = useUsers();
+const user = getAuthUser();
+
+console.log('user', user.value);
+
 setTimeout(() => {
-  router.push('/edit');
-}, 2000);
+  user.value ? router.push('/edit') : router.push('/login');
+}, 1000);
 
 
 </script>

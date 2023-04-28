@@ -33,12 +33,13 @@ router.post('/register', async (req, res) => {
     return res.status(400).json({error: 'Email ya registrado'});
   }
 
+  //create usuario
+  const data = req.body;
+
   // hash password with bcrypt
   const saltRounds = 10;
   const hashedPassword = bcrypt.hashSync(data.password, saltRounds);
 
-  //create usuario
-  const data = req.body;
   const result = await um.create(
     data.email,
     data.firstname,

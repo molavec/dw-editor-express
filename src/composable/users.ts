@@ -14,6 +14,10 @@ export const useUsers = () => {
     return activeUser;
   };
 
+  const setActiveUser = (user: UserType) => {
+    activeUser.value = user;
+  };
+
   const getActiveUserFullname = () => {
     return getFullname(activeUser.value?.firstname, activeUser.value?.lastname);
   };
@@ -21,6 +25,10 @@ export const useUsers = () => {
   /* auth user */
   const getAuthUser = () => {
     return authUser;
+  };
+
+  const setAuthUser = (user: UserType) => {
+    authUser.value = user;
   };
 
   const getAuthUserFullname = () => {
@@ -106,8 +114,10 @@ export const useUsers = () => {
   return {
     //Methods
     getActiveUser,
+    setActiveUser,
     getActiveUserFullname,
     getAuthUser,
+    setAuthUser,
     getAuthUserFullname,
     getUsers,
     setActiveUserByEmail,
