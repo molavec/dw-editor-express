@@ -17,7 +17,7 @@
         <span
           v-else
           class="
-            bg-blue-100 text-blue-800
+            bg-rose-100 text-rose-800
             text-xs font-semibold 
             mr-2 px-2.5 py-0.5 rounded"
         >
@@ -32,13 +32,13 @@
       <!-- 
       <a href="#" class="grow">
         <div class="flex justify-center justify-items-center p-2 border-r-2">
-          <p class="text-blue-600">Duplicate</p>
+          <p class="text-rose-600">Duplicate</p>
         </div>
       </a>
        -->
       <router-link :to="`/text/${id}`" class="grow">
         <div class="flex justify-center justify-items-center p-2">
-          <p class="text-blue-600">Info</p>
+          <p class="text-rose-600">Info</p>
         </div>
       </router-link>
     </div>
@@ -54,14 +54,14 @@
       <!-- info button -->
       <!-- <a href="#" class="grow">
         <div class="flex justify-center justify-items-center p-2 border-r-2">
-          <p class="text-blue-600">Info</p>
+          <p class="text-rose-600">Info</p>
         </div>
       </a> -->
 
       <!-- Delete button -->
       <router-link :to="`/edit/${id}`" class="grow">
         <div class="flex justify-center justify-items-center p-2">
-          <p class="text-blue-600">Edit</p>
+          <p class="text-rose-600">Edit</p>
         </div>
       </router-link>
     </div>
