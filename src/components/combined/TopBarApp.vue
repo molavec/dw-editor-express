@@ -58,7 +58,7 @@
         <router-link v-if="user" to="/profile">
           <ProfileAvatar
             :username="user.alias || user.firstname"
-            :image="`http://localhost:3000${user.image}`"
+            :image="`http://localhost:3000${getAuthUser().value?.image}`"
             :border="false"
             custom-size="36px"
             bg-color="#be123c"

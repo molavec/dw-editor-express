@@ -82,7 +82,7 @@ router.post('/login', async (req, res) => {
 
 });
 
-router.put('/avatar', (req, res) => {
+router.put('/avatar', async (req, res) => {
 
   // console.log('req.body', req.body);
   // const data = req.body;
@@ -99,12 +99,14 @@ router.put('/avatar', (req, res) => {
   // Move the uploaded image to our upload folder
   file.mv(__dirname + '/../public/uploads/' + file.name);
 
-  const result = um.updateAvatar(
+  const result = await um.updateAvatar(
       req.body.id,
       '/uploads/' + file.name,
     );
 
-  res.status(200).json(result);
+  console.log('result from avatar', result);
+
+  res.status(200).send(result);
 });
 
 export default router;

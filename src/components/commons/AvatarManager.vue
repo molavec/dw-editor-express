@@ -28,6 +28,10 @@
 import { PlusCircleIcon } from '@heroicons/vue/24/outline';
 import { ref, type Ref } from 'vue';
 
+import {useUsers } from '../../composable/users';
+
+const { getAuthUser, setAuthUser } = useUsers();
+
 const props = defineProps<{
   userId: string,
   image: string | undefined,
@@ -59,8 +63,12 @@ const imageChange = (event: Event) => {
     fetch('http://localhost:3000/user/avatar', {
       method: 'PUT',
       body: form,
-    }).then((res) => {
-      console.log(res);
+    })
+    .then(response => response.json())
+    .then((result) => {
+      console.log('res avatar', result);
+      // TODO: update authInfo
+      setAuthUser({ ...getAuthUser().value, ...{ image: result.image} });  
     }).catch((error)=> {
       console.log(error);
     });
