@@ -2,10 +2,10 @@
   <div class="p-2">
 
     <ContentHeader :title="TITLE" />
-    <div class="space-y-6 my-6">
+    <div class="space-y-6 my-6 mb-[60px]">
       <!-- image uploader -->
       <div>
-        <AvatarManager />
+        <AvatarManager v-if="id" :user-id="id" :image="image"/>
       </div>
 
       <div>
@@ -154,7 +154,8 @@
   <!-- CTAs -->
   <EditorCTAContainer>
     <!-- Back CTA -->
-    <EditorCTA class="grow" :text="backText" @cta-click="clickBackHandler" />
+    <EditorCTA class="grow" text="< Back" @cta-click="clickBackHandler" />
+    <EditorCTA class="grow" text="Save" @cta-click="clickSaveHandler" />
   </EditorCTAContainer>
 </template>
 
@@ -164,26 +165,50 @@ import EditorCTAContainer from '../commons/EditorCTAContainer.vue';
 import EditorCTA from '../commons/EditorCTA.vue';
 import AvatarManager from '../commons/AvatarManager.vue';
 
+import { useNotifications } from '../../composable/notifications';
+
 import { useUsers } from '../../composable/users';
 // import { logoutUser } from '../../firebase/auth';
 import { ref } from 'vue';
 import router from '../../router';
+import type UserType from '@/interfaces/UserType';
 
 const TITLE = 'Profile';
-const backText = '< Back';
 
 // input reactive variables
-const { getActiveUser } = useUsers();
+const { getAuthUser, getActiveUser, setActiveUser, updateActiveUser } = useUsers();
+const { appendNotification } = useNotifications();
+
+setActiveUser(getAuthUser().value);
+
+console.log('activeUser', getActiveUser().value);
+
+const id = ref(getActiveUser().value?.id);
+const email = ref(getActiveUser().value?.email);
 const firstname = ref(getActiveUser().value?.firstname);
 const lastname = ref(getActiveUser().value?.lastname);
 const alias = ref(getActiveUser().value?.alias);
-const email = ref(getActiveUser().value?.email);
+const image = ref(getActiveUser().value?.image);
 // const password = ref('');
 // const repassword = ref('');
 // const currentPassword = ref('');
 
 const clickBackHandler = () => {
   router.push('/');
+};
+
+const clickSaveHandler = async () => {
+  const user: UserType = {
+    id: id.value,
+    email: email.value,
+    firstname: firstname.value,
+    lastname: lastname.value,
+    alias: alias.value,
+  };
+  const result = await updateActiveUser(user);
+  
+  appendNotification('Usuario actualizado.');
+
 };
 
 // const logoutActions = async () => {

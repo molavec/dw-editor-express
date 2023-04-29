@@ -28,16 +28,19 @@
 import { PlusCircleIcon } from '@heroicons/vue/24/outline';
 import { ref, type Ref } from 'vue';
 
-const image = ref('');
-const imageInput:  Ref<any> = ref(undefined);
+const props = defineProps<{
+  userId: string,
+  image: string | undefined,
+}>();
 
+const image = ref(props.image);
+const imageInput:  Ref<any> = ref(undefined);
 
 const clickHandler = () => {
   if (imageInput.value) imageInput.value.click();
 };
 
 const imageChange = (event: Event) => {
-  console.log(event);
   
   const target= event.target as HTMLInputElement;
 
@@ -51,7 +54,7 @@ const imageChange = (event: Event) => {
     form.append('file', target?.files[0]);
   
     //TODO: añadir id del usuario al post desde el URL
-    form.append('userId', '01');
+    form.append('userId', props.userId);
   
     fetch('http://localhost:3000/user/avatar', {
       method: 'PUT',

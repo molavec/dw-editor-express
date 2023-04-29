@@ -22,6 +22,17 @@ router.get('/email/:email', async (req, res) => {
   res.send(result);
 });
 
+router.put('/', async (req, res) => {
+  const result = await um.update(
+    req.body.id,
+    req.body.email,
+    req.body.firstname,
+    req.body.lastname,
+    req.body.alias,
+    );
+  res.send(result);   
+});
+
 router.post('/register', async (req, res) => {
   //TODO: obtener los parametros del post
   // console.log('req.body', req.body); // your JSON

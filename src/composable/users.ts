@@ -14,7 +14,7 @@ export const useUsers = () => {
     return activeUser;
   };
 
-  const setActiveUser = (user: UserType) => {
+  const setActiveUser = (user: UserType | null) => {
     activeUser.value = user;
   };
 
@@ -91,10 +91,31 @@ export const useUsers = () => {
   };
 
   const updateActiveUser = (user: UserType) => {
-    // TODO: update user in firestore
+    // TODO: update user in express
 
-    // set active user in store
-    userStore.setActiveUser(user);
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+
+    const raw = JSON.stringify(user);
+
+    const requestOptions = {
+      method: 'PUT',
+      headers: myHeaders,
+      body: raw,
+    };
+
+    return new Promise((resolve, reject) => {
+      fetch('http://localhost:3000/user/', requestOptions)
+        .then(response => response.text())
+        .then(result => {
+          
+          // set active user in store
+          userStore.setActiveUser(user);
+
+          resolve(result);
+        })
+        .catch(error => reject(error));
+    })
   };
 
   const setActiveUserByEmail = async (email?: string) => {

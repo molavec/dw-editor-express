@@ -42,6 +42,47 @@ class UserManager  {
     });
   }
 
+  update(id, email, firstname, lastname, alias) {
+
+    //query build
+    const queryText = `
+      UPDATE dw_user
+      SET 
+        email = $2,
+        firstname = $3,
+        lastname = $4,
+        alias = $5
+      WHERE
+        id=$1
+      returning *;
+    `;
+
+    console.log('id', id);
+    console.log('email', email);
+    console.log('firstname', firstname);
+    console.log('lastname', lastname);
+    console.log('alias', alias);
+
+    const query = {
+      // give the query a unique name
+      name: 'create-user',
+      text: queryText,
+      values: [id, email, firstname, lastname, alias],
+    };
+
+    return new Promise ((resolve, reject) => {
+
+      this.dbm.getPool().query(query, (err, res) => {
+        if (err) reject(err);
+        
+        console.log('res', res);
+        
+        resolve(res.rows[0]);
+      });
+
+    });
+  }
+
   getById(id){
     const queryText = `
       select
@@ -76,7 +117,8 @@ class UserManager  {
       from 
         dw_user
       where 
-        email=$1;
+        email=$1
+      returning *;
     `;
     const values = [email];
 
@@ -91,7 +133,7 @@ class UserManager  {
 
       this.dbm.getPool().query(query, (err, res) => {
         if (err) reject(err);
-        
+        // console.log('res.rows', res.rows);
         resolve(res.rows[0]);
       });
     });
