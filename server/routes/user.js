@@ -29,7 +29,7 @@ router.put('/', async (req, res) => {
     req.body.firstname,
     req.body.lastname,
     req.body.alias,
-    );
+  );
   res.send(result);   
 });
 
@@ -100,11 +100,9 @@ router.put('/avatar', async (req, res) => {
   file.mv(__dirname + '/../public/uploads/' + file.name);
 
   const result = await um.updateAvatar(
-      req.body.id,
-      '/uploads/' + file.name,
-    );
-
-  console.log('result from avatar', result);
+    req.body.id,
+    '/uploads/' + file.name,
+  );
 
   res.status(200).send(result);
 });

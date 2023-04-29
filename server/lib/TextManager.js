@@ -1,9 +1,9 @@
 import DatabaseManager from './DatabaseManager.js';
 
-class TextManager extends DatabaseManager {
+class TextManager {
   
   constructor() {
-    super();
+    this.dbm = new DatabaseManager();
   }
 
 
@@ -30,10 +30,8 @@ class TextManager extends DatabaseManager {
         text: queryText,
         values: [id, title, content],
       };
-      
-      this.client.connect();
 
-      this.client.query(query, (err, res) => {
+      this.dbm.getPool().query(query, (err, res) => {
         if (err) reject(err);
 
         // console.log('res', res);
@@ -43,8 +41,6 @@ class TextManager extends DatabaseManager {
         } else {
           reject('Error');
         }
-
-        this.client.end();
 
       });
 
@@ -56,7 +52,7 @@ class TextManager extends DatabaseManager {
       select
         * 
       from 
-        text 
+        dw_text 
       where 
         id=$1;
     `;
@@ -70,10 +66,8 @@ class TextManager extends DatabaseManager {
     };
 
     return new Promise ((resolve, reject)=>{
-      
-      this.client.connect();
 
-      this.client.query(query, (err, res) => {
+      this.dbm.getPool().query(query, (err, res) => {
         if (err) reject(err);
 
         if(res){
@@ -81,8 +75,35 @@ class TextManager extends DatabaseManager {
         } else {
           reject('Error');
         }
-        
-        this.client.end();
+
+      });
+    });
+  }
+
+  getListByUserId(id){
+    const queryText = `
+      select
+        * 
+      from 
+        dw_text 
+      where 
+        userId=$1;
+    `;
+    const values = [id];
+
+    const query = {
+      // give the query a unique name
+      name: 'get-text-by-id',
+      text: queryText,
+      values: values,
+    };
+
+    return new Promise ((resolve, reject)=>{
+
+      this.dbm.getPool().query(query, (err, res) => {
+        if (err) reject(err);
+        console.log('res.rows', res.rows);
+        resolve(res.rows[0]);
 
       });
     });

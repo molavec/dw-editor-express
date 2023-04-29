@@ -1,5 +1,5 @@
 interface UserType {
-  id: string | undefined,
+  id: number | undefined,
   email: string | undefined,
   firstname?: string | undefined,
   lastname?: string | undefined,

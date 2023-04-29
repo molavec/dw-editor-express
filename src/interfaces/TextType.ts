@@ -1,9 +1,7 @@
-import type { Delta } from '@vueup/vue-quill';
-
 interface TextType {
   id?: string | undefined;
-  title: Delta | undefined;
-  content: Delta | undefined;
+  title: string | undefined;
+  content: string | undefined;
   authorId?: string | undefined;
   isPublished?: boolean | undefined;
 }

@@ -39,7 +39,7 @@ const user = getAuthUser();
 console.log('user', user.value);
 
 setTimeout(() => {
-  user.value ? router.push('/edit') : router.push('/login');
+  user.value ? router.push('/texts') : router.push('/login');
 }, 1000);
 
 
