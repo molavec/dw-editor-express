@@ -1,21 +1,23 @@
 import { storeToRefs } from 'pinia';
 import { useEditorStore } from '../stores/editorStore';
-import type TextType from '@/interfaces/TextType';
+import type TextType from '../interfaces/TextType';
+
 
 export const useTexts = () => {
   const editorStore  = useEditorStore();
-  const { isChatTypeActive, title, content, messages } = storeToRefs(editorStore);
+  const { isChatTypeActive, id, title, content, messages } = storeToRefs(editorStore);
 
-  const saveText = (id: number | undefined) => {
+  const saveText = (userId: number | undefined) => {
 
     if(isChatTypeActive) {
       content.value = messages.value.join('\n');
     }
 
     const data = {
-      id: id,
+      id: id.value,
       title: title.value,
       content: content.value,
+      userId: userId,
     };
 
     const myHeaders = new Headers();

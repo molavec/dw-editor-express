@@ -18,7 +18,7 @@ import RegisterView from '../components/views/RegisterView.vue';
 const routes: vueRouter.RouteRecordRaw[] = [
   { path: '/', name: 'Home', component: HomeView },
   { path: '/edit', name: 'Editor', component: EditorView },
-  // { path: '/edit/:id', name: 'EditorUpdate', component: EditorView },
+  { path: '/edit/:id', name: 'EditorUpdate', component: EditorView },
   // { path: '/text/:id', name: 'Text', component: PublishedTextView },
   // { path: '/info', name: 'Info', component: InfoTextView },
   { path: '/texts', name: 'TextList', component: UserTextListView },

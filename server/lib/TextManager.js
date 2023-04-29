@@ -7,28 +7,23 @@ class TextManager {
   }
 
 
-  save(id, title, content) {
+  create(title, content, userId) {
 
     return new Promise ((resolve, reject) => {
 
       const queryText = `
-        insert into text 
-          (id, title, content) 
+        insert into dw_text 
+          (title, content, userId) 
         values 
           ($1, $2, $3)
-        ON CONFLICT (id) DO UPDATE
-        set 
-        id = $1,
-        title = $2,
-        content = $3
         returning *;
       `;
 
       const query = {
         // give the query a unique name
-        name: 'save-text',
+        name: 'create-text',
         text: queryText,
-        values: [id, title, content],
+        values: [title, content, userId],
       };
 
       this.dbm.getPool().query(query, (err, res) => {
@@ -93,7 +88,7 @@ class TextManager {
 
     const query = {
       // give the query a unique name
-      name: 'get-text-by-id',
+      name: 'get-text-list-by-user-id',
       text: queryText,
       values: values,
     };

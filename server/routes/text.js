@@ -12,14 +12,14 @@ router.get('/:id', async (req, res) => {
 router.get('/list/:userId', async (req, res) => {
   const tm = new TextManager();
   const result = await tm.getListByUserId(req.params.userId);
-  res.send(result);   
+  res.send(result);
 });
 
 router.post('/', async (req, res) => {
   console.log(req.body);      // your JSON
   const data = req.body;
   const tm = new TextManager();
-  await tm.save(data.id, data.title, data.content);
+  await tm.create(data.title, data.content, data.userId);
   res.send(data);    // echo the result back
 });
 

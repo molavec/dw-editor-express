@@ -62,6 +62,7 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
+
 import EditorBubbleInput from '../commons/EditorBubbleInput.vue';
 import ChatInput from '../commons/ChatInput.vue';
 
@@ -70,12 +71,18 @@ import { SemipolarSpinner } from 'epic-spinners';
 import { storeToRefs } from 'pinia';
 import { useEditorStore } from '../../stores/editorStore';
 
+import { useRoute } from 'vue-router';
+const route = useRoute();
+
 const isChatTypeStore  = useEditorStore();
-const { isChatTypeActive, title, content, messages } = storeToRefs(isChatTypeStore);
+const { isChatTypeActive, id, title, content, messages } = storeToRefs(isChatTypeStore);
 
 // --> DATA
 const isLoading = ref(false);
 
+
+
+id.value = parseInt(route.params.id);
 
 // --> WHATCHERS
 watch(isChatTypeActive, (isChatActive) => {

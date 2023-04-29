@@ -14,7 +14,7 @@
         <ChatDocumentSwitcher/>
       </div>
       <div class="flex justify-center items-center px-2">
-        <button
+        <!-- <button
           class="text-rose-700
             border-2
             border-rose-700
@@ -32,7 +32,7 @@
             @click="loadHandler"
           >
           Abrir
-        </button>
+        </button> -->
       </div>
       <div class="flex justify-center items-center px-2">
         <button 
@@ -102,12 +102,12 @@ const { getAuthUser } = useUsers();
 const user = getAuthUser();
 
 // -> METHODS
-const loadHandler = () => {
-  loadText();
-};
+// const loadHandler = () => {
+//   loadText();
+// };
 
 const saveHandler = () => {
-  saveText();
+  saveText(getAuthUser().value?.id);
 };
 
 </script>

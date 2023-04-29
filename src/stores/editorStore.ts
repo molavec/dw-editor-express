@@ -4,6 +4,7 @@ import { defineStore } from 'pinia';
 export const useEditorStore = defineStore('esitor', () => {
 
   const isChatTypeActive = ref(true);
+  const id: Ref<number | undefined> = ref();
   const title = ref('');
   const content = ref('');
   const messages: Ref<string[]> = ref([]);
@@ -15,6 +16,7 @@ export const useEditorStore = defineStore('esitor', () => {
   
   return { 
     isChatTypeActive,
+    id,
     title,
     content,
     messages,
