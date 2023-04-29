@@ -1,9 +1,11 @@
-import type { Delta } from "@vueup/vue-quill";
+import type { Delta } from '@vueup/vue-quill';
 
-export default interface TextType {
+interface TextType {
   id?: string | undefined;
   title: Delta | undefined;
   content: Delta | undefined;
   authorId?: string | undefined;
   isPublished?: boolean | undefined;
 }
+
+export default TextType;

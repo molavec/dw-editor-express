@@ -1,39 +1,48 @@
-/* eslint-disable no-undef */
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
+import express from 'express';
+import fileUpload from 'express-fileupload';
+import cors from 'cors';
+import hbs from 'express-handlebars';
 
-const DatabaseManager = require('./lib/DatabaseManager');
-
+// routes
+import text from './routes/text.js';
+import user from './routes/user.js';
 
 const app = express();
 const port = 3000;
 
-app.use(bodyParser.json());
+/* static */
+app.use(express.static('public'));
 
+/* handlebars */
+app.engine('handlebars', hbs.engine());
+app.set('view engine', 'handlebars');
+app.set('views', './views');
+
+/* JSON */
+app.use(express.json());
+
+/* express-fileupload */
+app.use(fileUpload());
+
+/* cors */
 app.use(cors({
   // origin: ['http://localhost:5173']
-  origin: '*'
+  origin: '*',
 }));
 
+/* home */
 app.get('/', (req, res) => {
-  res.send('DigitalWriter.<span style="color: red;">ART</span> on Express JS!');
-})
+  res.render('home');
+});
 
-app.get('/text', async (req, res) => {
-  const dbm = await DatabaseManager.getInstance();
-  const result = await dbm.load();
-  res.send(result);   
-})
+/* text management */
+app.use('/text', text);
 
-app.post('/text', async (req, res) => {
-  console.log(req.body);      // your JSON
-  const data = req.body;
-  const dbm = await DatabaseManager.getInstance();
-  await dbm.save(data.title, data.content);
-  res.send(data);    // echo the result back
-})
+
+/* user management */
+app.use('/user', user);
+
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+  console.log(`Example app listening on port ${port}`);
+});

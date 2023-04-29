@@ -1,6 +1,14 @@
-1. clean project
-1. reescructurar el componente de guardado y carga
-1. crear login + avatar
-1. Para subir una imagen del avatar al hacer click en el avatar cambiar a vista de subida de archivo.
+1. crear tabla de usuario
+1. reestructurar tabla de textos
 
+
+
+JWT:
+https://www.section.io/engineering-education/how-to-build-authentication-api-with-jwt-token-in-nodejs/
+https://bluuweb.github.io/node/07-jwt/#validar-email-unico
+
+
+Imagen Avatar:
+https://codepen.io/xyxiao001/pen/yLooYKg
+https://pqina.nl/blog/upload-image-with-nodejs/
 

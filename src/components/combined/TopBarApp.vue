@@ -72,7 +72,7 @@
 </template>
 
 <script setup lang="ts">
-import { useTexts } from '@/composable/useTexts';
+import { useTexts } from '@/composable/texts';
 import DigitalWriterLogo from '../commons/DigitalWriterLogo.vue';
 import ChatDocumentSwitcher from '../commons/ChatDocumentSwitcher.vue';
 
@@ -90,10 +90,10 @@ const username = 'username';
 // -> METHODS
 const loadHandler = () => {
   loadText();
-}
+};
 
 const saveHandler = () => {
   saveText();
-}
+};
 
 </script>

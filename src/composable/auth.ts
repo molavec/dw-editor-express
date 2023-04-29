@@ -11,11 +11,16 @@ export const useAuth = () => {
     authStore.setAuth(auth);
   };
 
+  const signUp = async () => {
+    
+  };
+
   return {
     //Properties
     auth,
 
     //Methods
     setAuth,
+    signUp,
   };
 };

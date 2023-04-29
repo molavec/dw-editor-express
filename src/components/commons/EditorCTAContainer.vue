@@ -7,12 +7,18 @@
     <div v-for="notification in notifications" :key="notification.message?.replace(/ /g, '-')">
       <span
         v-if="notification.isDanger"
-        class="text-2xl bg-red-100 text-red-800 font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900"
+        class="
+          text-2xl bg-red-100 text-red-800 font-semibold 
+          mr-2 px-2.5 py-0.5 rounded 
+          dark:bg-red-200 dark:text-red-900"
         >{{ notification.message }}</span
       >
       <span
         v-else
-        class="text-2xl bg-green-100 text-green-800 font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900"
+        class="
+          text-2xl bg-green-100 text-green-800 font-semibold 
+          mr-2 px-2.5 py-0.5 rounded
+          dark:bg-green-200 dark:text-green-900"
         >{{ notification.message }}</span
       >
     </div>

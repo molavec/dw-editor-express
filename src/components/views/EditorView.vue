@@ -16,32 +16,43 @@
   </div>
   <div 
     v-else
-    class="flex justify-center h-[75vh] max-h-[75vh]"
+    class="flex justify-center grow"
   >
     <div class="flex flex-col content-start max-w-screen-md w-full px-2">
       <!-- Chat editor title -->
       <div>
-        <input class="editor-title w-full" type="text" placeholder="Your title here..." v-model="title"/>
+        <input 
+          v-model="title"
+          class="editor-title w-full" 
+          type="text"
+          placeholder="Your title here..."
+        />
       </div>
 
 
       <div v-if="isChatTypeActive" class="flex flex-col justify-stretch h-full">
         <!-- Chat Editor messages -->
-        <div class="grow bg-rose-100 p-4 overflow-auto overscroll-none">
+        <div class="grow bg-rose-100 p-4 mb-[60px] overflow-auto overscroll-auto">
           <div v-for="(message, index) in messages" :key="index">
             <EditorBubbleInput :text="message"/>
           </div>
         </div>
   
         <!-- Chat editor input -->
-        <div class="">
+        <div class="flex flex-row border-2 fixed bottom-0 left-0 right-0 bg-white">
           <ChatInput @send-message="messageHandler"/>      
         </div>
       </div>
 
       <div v-else class="p-4 h-full max-h-[600px] overflow-auto overscroll-none">
           <!-- TODO: Cambiar por arrglo de text -->
-        <textarea cols="30" rows="10" placeholder="Start here" v-model="content" class="p-2 w-full h-full resize-none" />
+        <textarea 
+          v-model="content"
+          cols="30"
+          rows="10"
+          placeholder="Start here"
+          class="p-2 w-full h-full resize-none"
+        />
       </div>
 
     </div>
@@ -73,12 +84,12 @@ watch(isChatTypeActive, (isChatActive) => {
   } else {
     content.value = messages.value.join('\n');
   };
-})
+});
 
 // --> METHODS
 const messageHandler = (message: string) => {
   messages.value.push(message);
-}
+};
 
 </script>
 
