@@ -62,10 +62,11 @@ export const useTexts = () => {
     
     return new Promise ((resolve, reject) => {
       fetch(`http://localhost:3000/text/list/${userId}`, requestOptions)
-        .then(response => response.text())
+        .then(response => response.json())
         .then(result => {
           console.log(result);
           const data = result;
+          console.log('result list by user id', result);
           resolve(data);
         })
         .catch(error => reject(error));

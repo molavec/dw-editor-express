@@ -70,7 +70,7 @@
 
 <script setup lang="ts">
 defineProps<{
-  id: string | undefined;
+  id: number | undefined;
   title: string | undefined;
   content: string | undefined;
   authorId: string | undefined;

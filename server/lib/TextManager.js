@@ -97,8 +97,8 @@ class TextManager {
 
       this.dbm.getPool().query(query, (err, res) => {
         if (err) reject(err);
-        console.log('res.rows', res.rows);
-        resolve(res.rows[0]);
+        console.log('res.rows by user id', res.rows);
+        resolve(res.rows);
 
       });
     });
