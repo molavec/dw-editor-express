@@ -83,6 +83,41 @@ class UserManager  {
     });
   }
 
+  updateAvatar(id, image) {
+
+    //query build
+    const queryText = `
+      UPDATE dw_user
+      SET 
+        image = $2
+      WHERE
+        id=$1
+      returning *;
+    `;
+
+    console.log('id', id);
+    console.log('image', image);
+
+    const query = {
+      // give the query a unique name
+      name: 'create-user',
+      text: queryText,
+      values: [id, image],
+    };
+
+    return new Promise ((resolve, reject) => {
+
+      this.dbm.getPool().query(query, (err, res) => {
+        if (err) reject(err);
+        
+        console.log('res', res);
+        
+        resolve(res.rows[0]);
+      });
+
+    });
+  }
+
   getById(id){
     const queryText = `
       select
@@ -117,8 +152,7 @@ class UserManager  {
       from 
         dw_user
       where 
-        email=$1
-      returning *;
+        email=$1;
     `;
     const values = [email];
 

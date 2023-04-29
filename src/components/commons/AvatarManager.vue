@@ -33,7 +33,7 @@ const props = defineProps<{
   image: string | undefined,
 }>();
 
-const image = ref(props.image);
+const image = ref(props.image ? `http://localhost:3000${props.image}`: undefined );
 const imageInput:  Ref<any> = ref(undefined);
 
 const clickHandler = () => {
@@ -54,7 +54,7 @@ const imageChange = (event: Event) => {
     form.append('file', target?.files[0]);
   
     //TODO: añadir id del usuario al post desde el URL
-    form.append('userId', props.userId);
+    form.append('id', props.userId);
   
     fetch('http://localhost:3000/user/avatar', {
       method: 'PUT',

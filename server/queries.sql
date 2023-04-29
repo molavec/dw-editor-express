@@ -20,4 +20,6 @@ select * from dw_text;
 
 select * from dw_user;
 
+delete from dw_user where id=2;
+
 DELETE FROM dw_user WHERE email like '%miguel@queonda.art%';

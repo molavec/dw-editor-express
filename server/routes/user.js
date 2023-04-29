@@ -84,7 +84,7 @@ router.post('/login', async (req, res) => {
 
 router.put('/avatar', (req, res) => {
 
-  console.log('req.body', req.body);
+  // console.log('req.body', req.body);
   // const data = req.body;
 
   // Get the file that was set to our field named "image"
@@ -99,7 +99,12 @@ router.put('/avatar', (req, res) => {
   // Move the uploaded image to our upload folder
   file.mv(__dirname + '/../public/uploads/' + file.name);
 
-  res.sendStatus(200);
+  const result = um.updateAvatar(
+      req.body.id,
+      '/uploads/' + file.name,
+    );
+
+  res.status(200).json(result);
 });
 
 export default router;
