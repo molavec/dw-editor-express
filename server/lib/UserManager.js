@@ -75,7 +75,7 @@ class UserManager  {
       this.dbm.getPool().query(query, (err, res) => {
         if (err) reject(err);
         
-        console.log('res', res);
+        // console.log('res', res);
         
         resolve(res.rows[0]);
       });
